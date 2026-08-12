@@ -1,0 +1,256 @@
+import { Tape, Highlight, Scribble, Sticky, Stamp, Marquee, SectionHeading } from './Primitives';
+
+const ctaStyle = (bg) => ({
+  border:'2px solid var(--ink)',
+  background: bg,
+  padding:'14px 22px',
+  fontFamily:"'Archivo Black', sans-serif",
+  textTransform:'uppercase', letterSpacing:'.08em',
+  fontSize: 14,
+  cursor:'pointer',
+  boxShadow:'4px 4px 0 var(--ink)',
+  transition:'transform .1s ease, box-shadow .1s ease',
+});
+
+const FeatureCard = ({ icon, tag, title, body, rotate = 0, bg = 'white', onClick }) => (
+  <div onClick={onClick} style={{
+    cursor: 'pointer',
+    background: bg,
+    border: '2px solid var(--ink)',
+    padding: '22px 20px 20px',
+    transform: `rotate(${rotate}deg)`,
+    position: 'relative',
+    boxShadow: '5px 5px 0 var(--ink)',
+    transition: 'transform .15s ease, box-shadow .15s ease',
+  }}
+    onMouseEnter={e => { e.currentTarget.style.transform = `rotate(${rotate}deg) translate(-2px,-2px)`; e.currentTarget.style.boxShadow = '8px 8px 0 var(--pink)'; }}
+    onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${rotate}deg)`; e.currentTarget.style.boxShadow = '5px 5px 0 var(--ink)'; }}
+  >
+    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+      <span style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, letterSpacing:'.2em', color:'var(--ink-soft)' }}>NO.{tag}</span>
+      <span style={{ fontSize: 26 }}>{icon}</span>
+    </div>
+    <h3 style={{
+      fontFamily:"'Alfa Slab One', serif",
+      fontSize: 32, margin: '18px 0 8px', lineHeight: 1,
+    }}>{title}</h3>
+    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.45, color:'var(--ink-soft)' }}>{body}</p>
+    <div style={{ marginTop: 14, fontFamily:"'Kalam', cursive", fontSize: 18 }}>
+      open &rarr;
+    </div>
+  </div>
+);
+
+const Home = ({ go, tweaks }) => {
+  return (
+    <div style={{ position: 'relative', padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
+
+      {/* Top meta row */}
+      <div style={{
+        display:'flex', justifyContent:'space-between', alignItems:'center',
+        fontFamily:"'JetBrains Mono', monospace", fontSize: 12, letterSpacing:'.12em',
+        textTransform: 'uppercase', color:'var(--ink-soft)', paddingBottom: 18,
+        borderBottom: '1.5px dashed var(--ink-soft)',
+      }}>
+        <span>Est. 1995 &middot; Issue No. 31</span>
+        <span>University of Houston Pre-Pharmacy Association</span>
+        <span>Spring Semester &middot; 2026</span>
+      </div>
+
+      {/* Hero */}
+      <div style={{ position:'relative', marginTop: 28, minHeight: 520 }}>
+
+        {/* Big UHPPA wordmark — collage */}
+        <div style={{ position:'relative', display:'flex', alignItems:'flex-start', gap: 0, flexWrap:'wrap' }}>
+
+          {/* U on cream tag */}
+          <div style={{ position:'relative', marginRight: -6 }}>
+            <Tape r={-14} style={{ top:-10, left: 30 }}/>
+            <div style={{
+              fontFamily:"'Alfa Slab One', serif",
+              fontSize: 240, lineHeight: .85,
+              color: 'var(--ink)',
+              background: 'white',
+              padding: '20px 28px 8px',
+              boxShadow:'0 10px 24px rgba(0,0,0,.12)',
+              transform:'rotate(-3deg)',
+            }}>U</div>
+          </div>
+
+          {/* H with slash through, cut-out magazine style */}
+          <div style={{ position:'relative', marginTop: 12, marginRight: -4 }}>
+            <div style={{
+              fontFamily:"'Archivo Black', sans-serif",
+              fontSize: 240, lineHeight: .85,
+              color: 'var(--paper)',
+              background: 'var(--ink)',
+              padding: '20px 22px 8px',
+              transform:'rotate(2deg)',
+              position:'relative',
+            }}>H
+              <span style={{
+                position:'absolute', left: -4, right: -4, top:'48%',
+                height: 10, background: 'var(--pink)', transform:'rotate(-4deg)',
+              }}/>
+            </div>
+          </div>
+
+          {/* P — polaroid style with the logo behind */}
+          <div style={{ position:'relative', marginTop: -4 }}>
+            <Tape r={8} color="var(--pink)" w={72} style={{ top:-6, left: 52 }}/>
+            <div style={{
+              fontFamily:"'Rubik Mono One', sans-serif",
+              fontSize: 220, lineHeight: .85,
+              color: 'var(--green)',
+              background: 'var(--paper-2)',
+              padding: '22px 20px 10px',
+              border: '2px solid var(--ink)',
+              boxShadow:'6px 6px 0 var(--ink)',
+              transform:'rotate(-2deg)',
+            }}>P</div>
+          </div>
+
+          {/* P — handwritten marker style */}
+          <div style={{ position:'relative', marginTop: 30, marginLeft: -8 }}>
+            <div style={{
+              fontFamily:"'Alfa Slab One', serif",
+              fontSize: 230, lineHeight: .85,
+              color: 'transparent',
+              transform:'rotate(4deg)',
+              WebkitTextStroke: '2px var(--ink)',
+              textShadow: '6px 6px 0 var(--pink)',
+            }}>P</div>
+          </div>
+
+          {/* A — giant cream block */}
+          <div style={{ position:'relative', marginTop: -6, marginLeft: -2 }}>
+            <Tape r={-20} color="var(--green)" w={88} style={{ top:-10, left: 26 }}/>
+            <div style={{
+              fontFamily:"'Archivo Black', sans-serif",
+              fontSize: 240, lineHeight: .85,
+              color: 'var(--ink)',
+              background: 'var(--tape)',
+              padding: '20px 30px 8px',
+              transform:'rotate(-1deg)',
+              boxShadow:'0 10px 24px rgba(0,0,0,.12)',
+            }}>A</div>
+          </div>
+
+        </div>
+
+        {/* Subtitle paragraph */}
+        <div style={{ display:'grid', gridTemplateColumns:'1.1fr 1fr', gap: 40, marginTop: 48, alignItems:'start' }}>
+          <div style={{ position:'relative' }}>
+            <p style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontSize: 26, lineHeight: 1.35, margin: 0, maxWidth: 620,
+            }}>
+              The <Highlight color="var(--tape)">University of Houston Pre-Pharmacy Association</Highlight> supports students pursuing careers in pharmacy &mdash; through <b>networking</b>, <b>volunteer opportunities</b>, and <b>pharmacy school application guidance</b>. Since <b>1995</b>.
+            </p>
+            {tweaks.showAnnotations && (
+              <div style={{ position:'absolute', top: -30, right: -10, fontFamily:"'Kalam', cursive", color:'var(--margin)', fontSize: 20, transform:'rotate(-6deg)' }}>
+                &larr; future pharmacists!
+                <Scribble color="var(--margin)" width={100} height={10} style={{ marginTop: -2 }}/>
+              </div>
+            )}
+
+            <div style={{ display:'flex', gap: 14, marginTop: 28, flexWrap:'wrap' }}>
+              <button onClick={()=>go('login')} style={ctaStyle('var(--pink)')}>Member Login &rarr;</button>
+              <button onClick={()=>go('calendar')} style={ctaStyle('white')}>See the calendar</button>
+            </div>
+          </div>
+
+          {/* Right: taped logo + sticky note */}
+          <div style={{ position:'relative', minHeight: 360 }}>
+            <Tape r={10} color="var(--pink)" w={110} style={{ top:-4, left: 120 }}/>
+            <Tape r={-12} color="var(--green)" w={90} style={{ top:-8, right: 40 }}/>
+            <div style={{
+              width: 280, height: 280, margin:'14px auto 0', padding: 10,
+              background: 'white', transform:'rotate(-4deg)',
+              boxShadow:'0 12px 28px rgba(0,0,0,.18)',
+            }}>
+              <img src="/uhppa-logo.png" alt="UHPPA crest"
+                style={{ width:'100%', height:'100%', objectFit:'cover', filter:'contrast(1.1)' }}/>
+              <div style={{
+                textAlign:'center', fontFamily:"'Kalam', cursive", color:'var(--ink)',
+                marginTop: 10, fontSize: 18,
+              }}>the crest &#9825; est. 1995</div>
+            </div>
+
+            <div style={{ position:'absolute', right: -10, bottom: 0 }}>
+              <Sticky color="var(--green)" rotate={6} style={{ width: 180 }}>
+                <b style={{ fontSize: 22 }}>New!</b><br/>
+                Spring points reset<br/>
+                <u>Jan 22</u>.
+              </Sticky>
+            </div>
+
+            <div style={{ position:'absolute', left: -20, bottom: 40 }}>
+              <Stamp color="var(--pink)" rotate={-14}>Members only &middot;&#9733;&middot;</Stamp>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Marquee */}
+      <div style={{ marginTop: 60 }}>
+        <Marquee items={[
+          'General Meeting — Thursdays 7pm', 'PharmCAS workshop Apr 25',
+          'Points reset January 22', 'Health fair volunteers needed',
+          tweaks.tagline,
+        ]} bg="var(--ink)" color="var(--paper)"/>
+      </div>
+
+      {/* Four feature cards — magazine cut-outs */}
+      <div style={{ marginTop: 64 }}>
+        <SectionHeading kicker="what we do" title="Club, but make it organized." rotate={-1}/>
+        <div style={{
+          marginTop: 36, display:'grid', gap: 28,
+          gridTemplateColumns:'repeat(4, 1fr)',
+        }}>
+          <FeatureCard icon="&#9986;" tag="01" title="Networking" body="Mixers with PharmD students, pharmacists, and alumni from UH partner programs." rotate={-2} bg="white" onClick={()=>go('calendar')}/>
+          <FeatureCard icon="&#8853;" tag="02" title="Volunteer Ops" body="Clinics, health fairs & drives — hours that count for your application." rotate={1.5} bg="var(--paper-2)" onClick={()=>go('calendar')}/>
+          <FeatureCard icon="&#9998;" tag="03" title="App Guidance" body="PCAT prep, PharmCAS help, mock interviews & essay reviews from upperclassmen." rotate={-1} bg="white" onClick={()=>go('slides')}/>
+          <FeatureCard icon="&#9733;" tag="04" title="Points & Leaderboard" body="Show up, volunteer, prep. Rack up points & earn cords at year-end." rotate={2} bg="var(--tape)" onClick={()=>go('leaderboard')}/>
+        </div>
+      </div>
+
+      {/* Strip: numbers */}
+      <div style={{
+        marginTop: 80,
+        display:'grid', gridTemplateColumns:'repeat(4,1fr)',
+        border:'2px solid var(--ink)', background:'white',
+      }}>
+        {[
+          ['127','active members'],
+          ['31','years running'],
+          ['52','events per year'],
+          ['2,340','volunteer hrs logged'],
+        ].map(([n,l],i)=>(
+          <div key={i} style={{
+            padding: '26px 20px', borderRight: i<3 ? '2px solid var(--ink)' : 'none',
+            textAlign:'center',
+          }}>
+            <div style={{ fontFamily:"'Alfa Slab One', serif", fontSize: 56, lineHeight:1, color:'var(--ink)' }}>{n}</div>
+            <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, letterSpacing:'.15em', textTransform:'uppercase', marginTop: 6, color:'var(--ink-soft)' }}>{l}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer scraps */}
+      <div style={{ marginTop: 80, display:'flex', justifyContent:'space-between', alignItems:'flex-end', flexWrap:'wrap', gap: 20 }}>
+        <div style={{ fontFamily:"'Kalam', cursive", fontSize: 22, color:'var(--ink-soft)' }}>
+          &mdash; with love, from the UHPPA exec board
+          <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, marginTop: 8, letterSpacing:'.12em', textTransform:'uppercase' }}>
+            pre-pharm @ university of houston &middot; cougars for pharmacy
+          </div>
+        </div>
+        <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, letterSpacing:'.12em', textTransform:'uppercase', color:'var(--ink-soft)' }}>
+          &copy; 2026 uhppa &middot; made by students, for students
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
