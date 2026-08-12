@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import { NavBtn } from './components/Primitives';
 import Home from './components/Home';
 import Calendar from './components/Calendar';
@@ -9,7 +10,8 @@ import Login from './components/Login';
 import Tweaks from './components/Tweaks';
 
 const App = () => {
-  const [tab, setTab] = useState(() => localStorage.getItem('uhppa_tab') || 'home');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [tweaks, setTweaks] = useState({
     accent: 'tape',
     showAnnotations: true,
@@ -20,20 +22,23 @@ const App = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [user, setUser] = useState(null);
 
-  useEffect(() => { localStorage.setItem('uhppa_tab', tab); }, [tab]);
-
   const go = (t) => {
     if (t === 'login') { setLoginOpen(true); return; }
-    setTab(t);
+    navigate(t === 'home' ? '/' : `/${t}`);
   };
 
   const tabs = [
-    { id:'home',        label:'Home' },
-    { id:'calendar',    label:'Calendar' },
-    { id:'slides',      label:'Slides' },
-    { id:'points',      label:'Points' },
-    { id:'leaderboard', label:'Leaderboard' },
+    { id:'home',        path:'/',            label:'Home' },
+    { id:'calendar',    path:'/calendar',    label:'Calendar' },
+    { id:'slides',      path:'/slides',      label:'Slides' },
+    { id:'points',      path:'/points',      label:'Points' },
+    { id:'leaderboard', path:'/leaderboard', label:'Leaderboard' },
   ];
+
+  const isActive = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <div style={{
@@ -56,7 +61,7 @@ const App = () => {
           display:'flex', alignItems:'center', justifyContent:'space-between',
           padding:'14px 48px',
         }}>
-          <div style={{ display:'flex', alignItems:'center', gap: 14, cursor:'pointer' }} onClick={()=>setTab('home')}>
+          <Link to="/" style={{ display:'flex', alignItems:'center', gap: 14, cursor:'pointer', textDecoration:'none' }}>
             <img src="/uhppa-logo.png" alt="" style={{ width: 44, height: 44, objectFit:'cover', border:'2px solid var(--ink)', background:'var(--ink)', padding: 2 }}/>
             <div>
               <div style={{ fontFamily:"'Alfa Slab One', serif", fontSize: 24, lineHeight: .9, letterSpacing:'.01em' }}>UHPPA</div>
@@ -64,11 +69,11 @@ const App = () => {
                 est. 1995
               </div>
             </div>
-          </div>
+          </Link>
 
           <nav style={{ display:'flex', gap: 10 }}>
             {tabs.map((t,i) => (
-              <NavBtn key={t.id} active={tab===t.id} onClick={()=>setTab(t.id)} rotate={(i%2?0.5:-0.5)}>
+              <NavBtn key={t.id} active={isActive(t.path)} onClick={()=>navigate(t.path)} rotate={(i%2?0.5:-0.5)}>
                 {t.label}
               </NavBtn>
             ))}
@@ -93,15 +98,17 @@ const App = () => {
 
       {/* Page body */}
       <main>
-        {tab === 'home'        && <Home go={go} tweaks={tweaks}/>}
-        {tab === 'calendar'    && <Calendar tweaks={tweaks}/>}
-        {tab === 'slides'      && <Slides tweaks={tweaks}/>}
-        {tab === 'points'      && <Points tweaks={tweaks}/>}
-        {tab === 'leaderboard' && <Leaderboard tweaks={tweaks}/>}
+        <Routes>
+          <Route path="/" element={<Home go={go} tweaks={tweaks}/>}/>
+          <Route path="/calendar" element={<Calendar tweaks={tweaks}/>}/>
+          <Route path="/slides" element={<Slides tweaks={tweaks}/>}/>
+          <Route path="/points" element={<Points tweaks={tweaks}/>}/>
+          <Route path="/leaderboard" element={<Leaderboard tweaks={tweaks}/>}/>
+        </Routes>
       </main>
 
       {loginOpen && (
-        <Login close={()=>setLoginOpen(false)} onLogin={(email)=>{ setUser(email); setLoginOpen(false); setTab('points'); }}/>
+        <Login close={()=>setLoginOpen(false)} onLogin={(email)=>{ setUser(email); setLoginOpen(false); navigate('/points'); }}/>
       )}
 
       <Tweaks tweaks={tweaks} setTweaks={setTweaks} visible={tweakVisible}/>
