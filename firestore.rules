@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public collections — anyone can read
+    match /events/{doc} {
+      allow read: if true;
+      allow write: if false; // locked down until Phase 4
+    }
+    match /officers/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /sponsors/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /clubInfo/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    // Member-only collections — locked down until Phase 2
+    match /members/{doc} {
+      allow read, write: if false;
+    }
+    match /pointsLedger/{doc} {
+      allow read, write: if false;
+    }
+  }
+}

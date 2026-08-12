@@ -1,0 +1,23 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Public read for gallery and assets
+    match /gallery/{file} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /officers/{file} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /sponsors/{file} {
+      allow read: if true;
+      allow write: if false;
+    }
+    // Member-only slides
+    match /slides/{file} {
+      allow read: if false; // locked until Phase 2 auth
+      allow write: if false;
+    }
+  }
+}
