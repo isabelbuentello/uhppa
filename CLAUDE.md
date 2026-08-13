@@ -60,30 +60,30 @@ public/
 - [x] Routed pages for all six nav items
 - [x] React Router for proper URL routing (currently tab-based state)
 - [x] Firebase project setup: Firestore, Auth, Storage, Hosting all enabled
-- [ ] Firebase emulator suite running locally
+- [x] Firebase emulator suite running locally
 - **Done when:** you can navigate every route and the header looks like the mockup.
 
 ### Phase 1 — Public Site (~1 week)
-- [ ] Home: hero lockup, about paragraph, socials row, CTA buttons
-- [ ] Photo gallery with lightbox, images from Storage, thumbnails generated on upload
-- [ ] Officer bios: headshot, name, position, short bio, ordered by `sortOrder`, filtered to `active`
+- [x] Home: hero lockup, about paragraph, socials row, CTA buttons
+- [x] Photo gallery with lightbox, images from Storage, thumbnails generated on upload
+- [x] Officer bios: headshot, name, position, short bio, ordered by `sortOrder`, filtered to `active`
   - Reuse polaroid treatment from leaderboard mockup
-- [ ] Sponsors: logo wall grouped by tier, each logo linking out
+- [x] Sponsors: logo wall grouped by tier, each logo linking out
   - Quieter, uniform grid — tape-and-sticker styling should NOT fight sponsor branding
-- [ ] Calendar month grid, prev/next navigation, event chips colored by category
-- [ ] All content pulled from Firestore, nothing hardcoded
+- [x] Calendar month grid, prev/next navigation, event chips colored by category
+- [x] All content pulled from Firestore, nothing hardcoded
 - **Done when:** you can add an event, an officer, and a sponsor in the Firebase console and all three appear on the site.
 
 ### Phase 2 — Auth & Membership (~1.5 weeks)
-- [ ] Sign-up and sign-in modal matching the mockup
-- [ ] Any email domain accepted — officer approval is the only membership gate
-- [ ] Email verification required before account activates
-- [ ] New accounts land at `role: pending`
-- [ ] Password reset flow
-- [ ] Route guards: public, member-only, officer-only
-- [ ] Officer approval queue: pending list, approve/deny, Cloud Function sets the claim
-- [ ] Collect name, classification, and major at sign-up (so officers can identify members in approval queue)
-- [ ] Enable Firebase App Check and email enumeration protection (open sign-up will attract bots)
+- [x] Sign-up and sign-in modal matching the mockup
+- [x] Any email domain accepted — officer approval is the only membership gate
+- [x] Email verification required before account activates
+- [x] New accounts land at `role: pending`
+- [x] Password reset flow
+- [x] Route guards: public, member-only, officer-only
+- [x] Officer approval queue: pending list, approve/deny, Cloud Function sets the claim
+- [x] Collect name, classification, and major at sign-up (so officers can identify members in approval queue)
+- [ ] Enable Firebase App Check and email enumeration protection (open sign-up will attract bots) — deferred to Phase 6
 - **Done when:** a new sign-up sees a "waiting for approval" state, and an officer approving them unlocks member pages on next token refresh.
 
 ### Phase 3 — Member Features (~2 weeks)

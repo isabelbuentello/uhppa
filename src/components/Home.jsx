@@ -1,4 +1,15 @@
 import { Tape, Highlight, Scribble, Sticky, Stamp, Marquee, SectionHeading } from './Primitives';
+import Officers from './Officers';
+import Sponsors from './Sponsors';
+import { useFirestoreDoc } from '../hooks/useFirestore';
+
+const socialLink = {
+  fontFamily: "'JetBrains Mono', monospace",
+  fontSize: 12, letterSpacing: '.1em', textTransform: 'uppercase',
+  color: 'var(--ink)', textDecoration: 'none',
+  borderBottom: '2px solid var(--pink)',
+  paddingBottom: 2,
+};
 
 const ctaStyle = (bg) => ({
   border:'2px solid var(--ink)',
@@ -42,6 +53,10 @@ const FeatureCard = ({ icon, tag, title, body, rotate = 0, bg = 'white', onClick
 );
 
 const Home = ({ go, tweaks }) => {
+  const { data: clubInfo } = useFirestoreDoc('clubInfo', 'main');
+  const stats = clubInfo?.stats;
+  const socials = clubInfo?.socials;
+
   return (
     <div style={{ position: 'relative', padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
 
@@ -158,6 +173,31 @@ const Home = ({ go, tweaks }) => {
               <button onClick={()=>go('login')} style={ctaStyle('var(--pink)')}>Member Login &rarr;</button>
               <button onClick={()=>go('calendar')} style={ctaStyle('white')}>See the calendar</button>
             </div>
+
+            {socials && (
+              <div style={{ display: 'flex', gap: 16, marginTop: 20, alignItems: 'center' }}>
+                {socials.instagram && (
+                  <a href={socials.instagram} target="_blank" rel="noopener noreferrer" style={socialLink}>
+                    &#9741; Instagram
+                  </a>
+                )}
+                {socials.email && (
+                  <a href={`mailto:${socials.email}`} style={socialLink}>
+                    &#9993; Email
+                  </a>
+                )}
+                {socials.linktree && (
+                  <a href={socials.linktree} target="_blank" rel="noopener noreferrer" style={socialLink}>
+                    &#9741; Linktree
+                  </a>
+                )}
+                {socials.discord && (
+                  <a href={socials.discord} target="_blank" rel="noopener noreferrer" style={socialLink}>
+                    &#9670; Discord
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Right: taped logo + sticky note */}
@@ -222,10 +262,10 @@ const Home = ({ go, tweaks }) => {
         border:'2px solid var(--ink)', background:'white',
       }}>
         {[
-          ['127','active members'],
-          ['31','years running'],
-          ['52','events per year'],
-          ['2,340','volunteer hrs logged'],
+          [stats?.activeMembers?.toLocaleString() ?? '127','active members'],
+          [stats?.yearsRunning?.toLocaleString() ?? '31','years running'],
+          [stats?.eventsPerYear?.toLocaleString() ?? '52','events per year'],
+          [stats?.volunteerHours?.toLocaleString() ?? '2,340','volunteer hrs logged'],
         ].map(([n,l],i)=>(
           <div key={i} style={{
             padding: '26px 20px', borderRight: i<3 ? '2px solid var(--ink)' : 'none',
@@ -236,6 +276,9 @@ const Home = ({ go, tweaks }) => {
           </div>
         ))}
       </div>
+
+      <Officers />
+      <Sponsors />
 
       {/* Footer scraps */}
       <div style={{ marginTop: 80, display:'flex', justifyContent:'space-between', alignItems:'flex-end', flexWrap:'wrap', gap: 20 }}>
