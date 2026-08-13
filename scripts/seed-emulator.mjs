@@ -84,6 +84,34 @@ async function seed() {
   }
   console.log(`✓ sponsors (${sponsors.length})`);
 
+  // --- Gallery ---
+  const gallery = [
+    { id: 'photo1', caption: 'Spring mixer 2026',         thumbUrl: '', fullUrl: '', sortOrder: 1 },
+    { id: 'photo2', caption: 'General meeting — Apr 16',  thumbUrl: '', fullUrl: '', sortOrder: 2 },
+    { id: 'photo3', caption: 'Blood drive volunteers',    thumbUrl: '', fullUrl: '', sortOrder: 3 },
+    { id: 'photo4', caption: 'Pharm school panel Q&A',    thumbUrl: '', fullUrl: '', sortOrder: 4 },
+    { id: 'photo5', caption: 'Study jam crew',            thumbUrl: '', fullUrl: '', sortOrder: 5 },
+    { id: 'photo6', caption: 'End-of-year banquet 2025',  thumbUrl: '', fullUrl: '', sortOrder: 6 },
+  ];
+  for (const g of gallery) {
+    const { id, ...data } = g;
+    await db.doc(`gallery/${id}`).set(data);
+  }
+  console.log(`✓ gallery (${gallery.length})`);
+
+  // --- Test Members ---
+  const testMembers = [
+    { uid: 'test-pending-1', name: 'Taylor Swift', email: 'taylor@test.com', major: 'Biology', classification: 'Junior', role: 'pending' },
+    { uid: 'test-pending-2', name: 'Jordan Lee', email: 'jordan@test.com', major: 'Chemistry', classification: 'Sophomore', role: 'pending' },
+    { uid: 'test-member-1', name: 'Casey Kim', email: 'casey@test.com', major: 'Neuroscience', classification: 'Senior', role: 'member' },
+    { uid: 'test-officer-1', name: 'Officer Admin', email: 'officer@test.com', major: 'Chemistry', classification: 'Senior', role: 'officer' },
+  ];
+  for (const m of testMembers) {
+    const { uid, ...data } = m;
+    await db.doc(`members/${uid}`).set({ ...data, createdAt: new Date() });
+  }
+  console.log(`✓ test members (${testMembers.length})`);
+
   console.log('\n🎉 Seed complete!');
   process.exit(0);
 }

@@ -18,9 +18,16 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
-    // Member-only collections — locked down until Phase 2
-    match /members/{doc} {
-      allow read, write: if false;
+    match /gallery/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    // Members collection
+    match /members/{uid} {
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if request.auth != null && request.auth.token.role == 'officer';
+      allow update: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /pointsLedger/{doc} {
       allow read, write: if false;
