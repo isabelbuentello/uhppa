@@ -112,6 +112,62 @@ async function seed() {
   }
   console.log(`✓ test members (${testMembers.length})`);
 
+  // --- Points Guide + Semester Goal ---
+  await db.doc('clubInfo/main').update({
+    pointsGuide: 'Earn points by attending meetings, volunteering, and participating in socials. General Meetings are worth 10 pts, volunteer events 15–20 pts, socials 5 pts, and special events vary. Reach 200 pts by end of semester for honors cords at graduation!',
+    semesterGoal: 200,
+  });
+  console.log('✓ pointsGuide + semesterGoal added to clubInfo');
+
+  // --- Check-in Codes on some events ---
+  await db.doc('events/gm-apr02').update({ checkinCode: 'UHPPA0402' });
+  await db.doc('events/gm-apr16').update({ checkinCode: 'UHPPA0416' });
+  await db.doc('events/gm-apr30').update({ checkinCode: 'UHPPA0430' });
+  console.log('✓ checkinCodes added to 3 events');
+
+  // --- Points Ledger ---
+  const ledgerEntries = [
+    { memberId: 'test-member-1', eventId: 'gm-apr02',    eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-02'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-member-1', eventId: 'study-apr07',  eventTitle: 'Study Jam',           points: 5,  category: 'social',    semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-07'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-member-1', eventId: 'vol-apr11',    eventTitle: 'Volunteer: Clinic',   points: 15, category: 'volunteer', semester: 'Fall 2026', method: 'request', status: 'verified', note: 'Was there but forgot code', createdAt: new Date('2026-04-11'), reviewedBy: 'test-officer-1', reviewedAt: new Date('2026-04-12') },
+    { memberId: 'test-member-1', eventId: 'gm-apr16',    eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-16'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-member-1', eventId: 'panel-apr20',  eventTitle: 'Pharm School Panel',  points: 12, category: 'special',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-20'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-member-1', eventId: 'blood-apr25',  eventTitle: 'Blood Drive',         points: 20, category: 'volunteer', semester: 'Fall 2026', method: 'request', status: 'pending',  note: 'Helped set up tables', createdAt: new Date('2026-04-25'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-member-1', eventId: 'movie-apr25',  eventTitle: 'Movie Night',         points: 5,  category: 'social',    semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-25'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-pending-1', eventId: 'gm-apr02',   eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-02'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-pending-1', eventId: 'gm-apr16',   eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-16'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-pending-1', eventId: 'vol-apr11',   eventTitle: 'Volunteer: Clinic',   points: 15, category: 'volunteer', semester: 'Fall 2026', method: 'request', status: 'verified', note: '', createdAt: new Date('2026-04-11'), reviewedBy: 'test-officer-1', reviewedAt: new Date('2026-04-12') },
+    { memberId: 'test-pending-2', eventId: 'gm-apr02',   eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-02'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-pending-2', eventId: 'study-apr07', eventTitle: 'Study Jam',           points: 5,  category: 'social',    semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-07'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'gm-apr02',   eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-02'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'gm-apr16',   eventTitle: 'General Meeting',    points: 10, category: 'meeting',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-16'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'vol-apr11',   eventTitle: 'Volunteer: Clinic',   points: 15, category: 'volunteer', semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-11'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'panel-apr20', eventTitle: 'Pharm School Panel',  points: 12, category: 'special',   semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-20'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'blood-apr25', eventTitle: 'Blood Drive',         points: 20, category: 'volunteer', semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-25'), reviewedBy: null, reviewedAt: null },
+    { memberId: 'test-officer-1', eventId: 'kaplan-apr23',eventTitle: 'Kaplan MCAT Q&A',     points: 8,  category: 'social',    semester: 'Fall 2026', method: 'checkin', status: 'verified', note: '', createdAt: new Date('2026-04-23'), reviewedBy: null, reviewedAt: null },
+  ];
+  for (let i = 0; i < ledgerEntries.length; i++) {
+    await db.doc(`pointsLedger/ledger-${i + 1}`).set(ledgerEntries[i]);
+  }
+  console.log(`✓ pointsLedger (${ledgerEntries.length})`);
+
+  // --- Slides ---
+  const slides = [
+    { id: 'slide-gm-apr16',  title: 'General Meeting — Apr 16',        date: '2026-04-16', tag: 'GM',       year: 2026, pageCount: 18, fileSize: '2.4 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-04-16'), sortOrder: 1 },
+    { id: 'slide-panel',     title: 'Pharm School Panel Q&A',          date: '2026-04-20', tag: 'Panel',    year: 2026, pageCount: 24, fileSize: '3.1 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-04-20'), sortOrder: 2 },
+    { id: 'slide-gm-apr02',  title: 'General Meeting — Apr 02',        date: '2026-04-02', tag: 'GM',       year: 2026, pageCount: 16, fileSize: '2.1 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-04-02'), sortOrder: 3 },
+    { id: 'slide-kaplan',    title: 'Kaplan MCAT — Prep Overview',      date: '2026-04-23', tag: 'Prep',     year: 2026, pageCount: 32, fileSize: '4.8 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-04-23'), sortOrder: 4 },
+    { id: 'slide-ethics',    title: 'Pharmacy Ethics Workshop',         date: '2026-03-28', tag: 'Workshop', year: 2026, pageCount: 22, fileSize: '2.9 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-03-28'), sortOrder: 5 },
+    { id: 'slide-research',  title: 'Intro to Research: Finding a Lab', date: '2026-03-14', tag: 'Research', year: 2026, pageCount: 20, fileSize: '2.5 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2026-03-14'), sortOrder: 6 },
+    { id: 'slide-fall-close',title: 'Fall Semester Closer',             date: '2025-12-04', tag: 'GM',       year: 2025, pageCount: 20, fileSize: '2.7 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2025-12-04'), sortOrder: 7 },
+    { id: 'slide-ochem',     title: 'Surviving OChem I',                date: '2025-11-13', tag: 'Workshop', year: 2025, pageCount: 26, fileSize: '3.4 MB', storageUrl: '', downloadUrl: '', uploadedBy: 'test-officer-1', createdAt: new Date('2025-11-13'), sortOrder: 8 },
+  ];
+  for (const s of slides) {
+    const { id, ...data } = s;
+    await db.doc(`slides/${id}`).set(data);
+  }
+  console.log(`✓ slides (${slides.length})`);
+
   console.log('\n🎉 Seed complete!');
   process.exit(0);
 }

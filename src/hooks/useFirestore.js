@@ -24,7 +24,7 @@ export function useFirestoreDoc(collectionName, docId) {
  * Live-updating collection query.
  * Pass Firestore query constraints (where, orderBy, limit, etc.) as the second arg.
  */
-export function useFirestoreQuery(collectionName, constraints = []) {
+export function useFirestoreQuery(collectionName, constraints = [], key = '') {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ export function useFirestoreQuery(collectionName, constraints = []) {
       setLoading(false);
     });
     return unsub;
-  }, [collectionName]);
+  }, [collectionName, key]);
 
   return { data, loading };
 }

@@ -16,7 +16,7 @@ service cloud.firestore {
     }
     match /clubInfo/{doc} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /gallery/{doc} {
       allow read: if true;
@@ -29,8 +29,29 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.token.role == 'officer';
       allow update: if request.auth != null && request.auth.token.role == 'officer';
     }
+    // Points ledger
     match /pointsLedger/{doc} {
-      allow read, write: if false;
+      // Members can create their own entries
+      allow create: if request.auth != null
+        && request.resource.data.memberId == request.auth.uid
+        && request.auth.token.role in ['member', 'officer'];
+      // Members can read their own entries
+      allow read: if request.auth != null
+        && resource.data.memberId == request.auth.uid;
+      // Any member/officer can read verified entries (needed for leaderboard)
+      allow read: if request.auth != null
+        && request.auth.token.role in ['member', 'officer']
+        && resource.data.status == 'verified';
+      // Officers can read and update all entries (approval queue in Phase 4)
+      allow read, update: if request.auth != null
+        && request.auth.token.role == 'officer';
+    }
+    // Slides collection
+    match /slides/{doc} {
+      allow read: if request.auth != null
+        && request.auth.token.role in ['member', 'officer'];
+      allow write: if request.auth != null
+        && request.auth.token.role == 'officer';
     }
   }
 }
