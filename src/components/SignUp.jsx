@@ -72,7 +72,7 @@ const SignUp = ({ close, onSignInClick }) => {
         ? 'That email is already registered. Try signing in.'
         : err.code === 'auth/weak-password'
         ? 'Password must be at least 6 characters.'
-        : 'Something went wrong. Try again.';
+        : `Something went wrong: ${err.code || err.message}`;
       setError(msg);
       setSubmitting(false);
     }
