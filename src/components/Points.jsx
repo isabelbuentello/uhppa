@@ -3,7 +3,7 @@ import { Tape, Highlight, Scribble, Sticky, Stamp, SectionHeading } from './Prim
 import { useAuth } from '../contexts/AuthContext';
 import { useFirestoreQuery, useFirestoreDoc } from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
-import { collection, addDoc, query, where, getDocs, serverTimestamp, orderBy } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
 import { getSemester } from '../lib/semester';
 
 const CATEGORIES = [
@@ -23,10 +23,18 @@ const Points = ({ tweaks }) => {
   const semesterGoal = clubInfo?.semesterGoal || 200;
 
   // Fetch this user's ledger entries
-  const { data: ledger, loading } = useFirestoreQuery('pointsLedger', [
+  const { data: rawLedger, loading } = useFirestoreQuery('pointsLedger', [
     where('memberId', '==', user?.uid || ''),
-    orderBy('createdAt', 'desc'),
   ], user?.uid || '');
+
+  // Sort client-side (avoids needing composite index)
+  const ledger = useMemo(() =>
+    [...rawLedger].sort((a, b) => {
+      const da = a.createdAt?.toDate ? a.createdAt.toDate() : new Date(a.createdAt);
+      const db2 = b.createdAt?.toDate ? b.createdAt.toDate() : new Date(b.createdAt);
+      return db2 - da;
+    }),
+  [rawLedger]);
 
   // Filter to current semester
   const semesterEntries = useMemo(() =>
