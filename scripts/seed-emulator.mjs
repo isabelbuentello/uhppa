@@ -32,21 +32,21 @@ async function seed() {
 
   // --- Events ---
   const events = [
-    { id: 'gm-apr02',     title: 'General Meeting',         date: '2026-04-02', category: 'meeting',   points: 10, color: 'pink' },
-    { id: 'study-apr07',   title: 'Study Jam',               date: '2026-04-07', category: 'social',    points: 5,  color: 'green' },
-    { id: 'vol-apr11',     title: 'Volunteer: Clinic',       date: '2026-04-11', category: 'volunteer', points: 15, color: 'blue' },
-    { id: 'exec-apr14',    title: 'Exec Board',              date: '2026-04-14', category: 'board',     points: 8,  color: 'ink' },
-    { id: 'gm-apr16',     title: 'General Meeting',         date: '2026-04-16', category: 'meeting',   points: 10, color: 'pink' },
-    { id: 'panel-apr20',   title: 'Pharm School Panel',      date: '2026-04-20', category: 'special',   points: 12, color: 'tape' },
-    { id: 'kaplan-apr23',  title: 'Kaplan MCAT Q&A',         date: '2026-04-23', category: 'social',    points: 8,  color: 'green' },
-    { id: 'blood-apr25',   title: 'Blood Drive',             date: '2026-04-25', category: 'volunteer', points: 20, color: 'pink' },
-    { id: 'movie-apr25',   title: 'Movie Night',             date: '2026-04-25', category: 'social',    points: 5,  color: 'blue' },
-    { id: 'gm-apr30',     title: 'General Meeting',         date: '2026-04-30', category: 'meeting',   points: 10, color: 'pink' },
-    { id: 'banquet-may03', title: 'End-of-yr Banquet',       date: '2026-05-03', category: 'special',   points: 25, color: 'pink' },
-    { id: 'cords-may07',  title: 'Cords Ceremony',          date: '2026-05-07', category: 'special',   points: 0,  color: 'tape' },
-    { id: 'kickoff-may10', title: 'Summer Kickoff',          date: '2026-05-10', category: 'social',    points: 5,  color: 'green' },
-    { id: 'study-may15',  title: 'Study Jam',               date: '2026-05-15', category: 'social',    points: 5,  color: 'green' },
-    { id: 'fair-may22',   title: 'Volunteer: Health Fair',   date: '2026-05-22', category: 'volunteer', points: 20, color: 'blue' },
+    { id: 'gm-apr02',     title: 'General Meeting',         date: '2026-04-02', time: '6:00 PM', category: 'meeting',   points: 10, color: 'pink' },
+    { id: 'study-apr07',   title: 'Study Jam',               date: '2026-04-07', time: '5:30 PM', category: 'social',    points: 5,  color: 'green' },
+    { id: 'vol-apr11',     title: 'Volunteer: Clinic',       date: '2026-04-11', time: '9:00 AM', category: 'volunteer', points: 15, color: 'blue' },
+    { id: 'exec-apr14',    title: 'Exec Board',              date: '2026-04-14', time: '7:00 PM', category: 'board',     points: 8,  color: 'ink' },
+    { id: 'gm-apr16',     title: 'General Meeting',         date: '2026-04-16', time: '6:00 PM', category: 'meeting',   points: 10, color: 'pink' },
+    { id: 'panel-apr20',   title: 'Pharm School Panel',      date: '2026-04-20', time: '5:00 PM', category: 'special',   points: 12, color: 'tape' },
+    { id: 'kaplan-apr23',  title: 'Kaplan MCAT Q&A',         date: '2026-04-23', time: '4:00 PM', category: 'social',    points: 8,  color: 'green' },
+    { id: 'blood-apr25',   title: 'Blood Drive',             date: '2026-04-25', time: '10:00 AM', category: 'volunteer', points: 20, color: 'pink' },
+    { id: 'movie-apr25',   title: 'Movie Night',             date: '2026-04-25', time: '7:30 PM', category: 'social',    points: 5,  color: 'blue' },
+    { id: 'gm-apr30',     title: 'General Meeting',         date: '2026-04-30', time: '6:00 PM', category: 'meeting',   points: 10, color: 'pink' },
+    { id: 'banquet-may03', title: 'End-of-yr Banquet',       date: '2026-05-03', time: '6:30 PM', category: 'special',   points: 25, color: 'pink' },
+    { id: 'cords-may07',  title: 'Cords Ceremony',          date: '2026-05-07', time: '3:00 PM', category: 'special',   points: 0,  color: 'tape' },
+    { id: 'kickoff-may10', title: 'Summer Kickoff',          date: '2026-05-10', time: '5:00 PM', category: 'social',    points: 5,  color: 'green' },
+    { id: 'study-may15',  title: 'Study Jam',               date: '2026-05-15', time: '5:30 PM', category: 'social',    points: 5,  color: 'green' },
+    { id: 'fair-may22',   title: 'Volunteer: Health Fair',   date: '2026-05-22', time: '8:00 AM', category: 'volunteer', points: 20, color: 'blue' },
   ];
   for (const e of events) {
     const { id, ...data } = e;

@@ -379,6 +379,8 @@ const Points = ({ tweaks }) => {
                   <div style={{ padding: '12px 16px' }}>
                     {r.status === 'verified' ? (
                       <span style={{ color: 'var(--green)', fontFamily: "'Kalam', cursive", fontSize: 18 }}>&#10003; verified</span>
+                    ) : r.status === 'denied' ? (
+                      <span style={{ color: 'var(--pink)', fontFamily: "'Kalam', cursive", fontSize: 18 }}>&times; denied</span>
                     ) : (
                       <span style={{ color: 'var(--tape)', fontFamily: "'Kalam', cursive", fontSize: 18 }}>&#9203; pending</span>
                     )}

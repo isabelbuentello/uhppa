@@ -1,0 +1,96 @@
+<h2>Phase 3 — Member Features: Design Overview</h2>
+<p class="subtitle">Review the full design before we write the spec</p>
+
+<div class="section">
+  <h3>Firestore Collections</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:8px">
+    <tr style="border-bottom:2px solid #333;text-align:left">
+      <th style="padding:8px">Collection</th>
+      <th style="padding:8px">Purpose</th>
+      <th style="padding:8px">Key Fields</th>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd">
+      <td style="padding:8px"><code>pointsLedger/{id}</code></td>
+      <td style="padding:8px">Every points entry</td>
+      <td style="padding:8px">memberId, eventId, points, category, semester, method (checkin/request), status (verified/pending)</td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd">
+      <td style="padding:8px"><code>slides/{id}</code></td>
+      <td style="padding:8px">Slide deck metadata</td>
+      <td style="padding:8px">title, date, tag, year, pageCount, fileSize, storageUrl, downloadUrl</td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd">
+      <td style="padding:8px"><code>events/{id}</code> (modified)</td>
+      <td style="padding:8px">Add check-in code</td>
+      <td style="padding:8px">+ checkinCode (string, optional)</td>
+    </tr>
+    <tr style="border-bottom:1px solid #ddd">
+      <td style="padding:8px"><code>clubInfo/main</code> (modified)</td>
+      <td style="padding:8px">How points work</td>
+      <td style="padding:8px">+ pointsGuide (string)</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Pages</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px">
+    <div style="border:2px solid #333;padding:16px;background:#fafafa">
+      <h4 style="margin:0 0 8px">Points Tracker</h4>
+      <ul style="font-size:13px;padding-left:18px;margin:0">
+        <li>Total + progress bar (semester goal)</li>
+        <li>Category breakdown cards</li>
+        <li>"How points work" collapsible</li>
+        <li>Activity log table</li>
+        <li>Check-in code form</li>
+        <li>Submit missing points form</li>
+      </ul>
+    </div>
+    <div style="border:2px solid #333;padding:16px;background:#fafafa">
+      <h4 style="margin:0 0 8px">Slides Archive</h4>
+      <ul style="font-size:13px;padding-left:18px;margin:0">
+        <li>Search by title</li>
+        <li>Year filter buttons</li>
+        <li>Card grid with metadata</li>
+        <li>Download from Firebase Storage</li>
+        <li>Upload deferred to Phase 4</li>
+      </ul>
+    </div>
+    <div style="border:2px solid #333;padding:16px;background:#fafafa">
+      <h4 style="margin:0 0 8px">Leaderboard</h4>
+      <ul style="font-size:13px;padding-left:18px;margin:0">
+        <li>Scope: Semester / Monthly / All-Time</li>
+        <li>Top 3 podium</li>
+        <li>Ranked table (4+)</li>
+        <li>Current user highlighted</li>
+        <li>Client-side aggregation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Key Decisions</h3>
+  <ul style="font-size:14px">
+    <li><strong>Points claiming:</strong> Check-in code (instant) + manual request (officer-reviewed)</li>
+    <li><strong>Semester:</strong> Auto-derived from date (Aug–Dec = Fall, Jan–May = Spring, Jun–Jul = Summer)</li>
+    <li><strong>Leaderboard:</strong> Client-side aggregation, optimize later if needed</li>
+    <li><strong>RSVP:</strong> Deferred (noted for future phase)</li>
+    <li><strong>Slides upload:</strong> Phase 4 (officer tools), Phase 3 builds the viewer only</li>
+  </ul>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="approve" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>Looks good — write the spec</h3>
+    </div>
+  </div>
+  <div class="option" data-choice="revise" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>I have changes</h3>
+    </div>
+  </div>
+</div>

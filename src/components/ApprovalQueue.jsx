@@ -1,4 +1,5 @@
 import { SectionHeading } from './Primitives';
+import AdminNav from './AdminNav';
 import { useFirestoreQuery } from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -22,6 +23,7 @@ const ApprovalQueue = () => {
 
   return (
     <div style={{ padding: '28px 48px 80px', maxWidth: 900, margin: '0 auto' }}>
+      <AdminNav />
       <SectionHeading kicker="officer tools" title="Approval Queue" rotate={-1} />
 
       {pending.length === 0 ? (

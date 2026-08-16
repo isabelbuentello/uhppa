@@ -9,6 +9,9 @@ import Points from './components/Points';
 import Leaderboard from './components/Leaderboard';
 import Gallery from './components/Gallery';
 import ApprovalQueue from './components/ApprovalQueue';
+import EventEditor from './components/EventEditor';
+import PointsQueue from './components/PointsQueue';
+import MemberRoster from './components/MemberRoster';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -136,6 +139,21 @@ const App = () => {
           <Route path="/admin/approvals" element={
             <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
               <ApprovalQueue />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/events" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <EventEditor />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/points" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <PointsQueue />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/members" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <MemberRoster />
             </ProtectedRoute>
           } />
         </Routes>
