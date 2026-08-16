@@ -12,6 +12,9 @@ import ApprovalQueue from './components/ApprovalQueue';
 import EventEditor from './components/EventEditor';
 import PointsQueue from './components/PointsQueue';
 import MemberRoster from './components/MemberRoster';
+import GalleryEditor from './components/GalleryEditor';
+import OfficerEditor from './components/OfficerEditor';
+import SponsorEditor from './components/SponsorEditor';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -154,6 +157,21 @@ const App = () => {
           <Route path="/admin/members" element={
             <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
               <MemberRoster />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/gallery" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <GalleryEditor />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/officers" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <OfficerEditor />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/sponsors" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <SponsorEditor />
             </ProtectedRoute>
           } />
         </Routes>

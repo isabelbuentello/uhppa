@@ -5,6 +5,9 @@ const tabs = [
   { path: '/admin/events',    label: 'Events' },
   { path: '/admin/points',    label: 'Points' },
   { path: '/admin/members',   label: 'Members' },
+  { path: '/admin/gallery',   label: 'Gallery' },
+  { path: '/admin/officers',  label: 'Officers' },
+  { path: '/admin/sponsors',  label: 'Sponsors' },
 ];
 
 const AdminNav = () => {

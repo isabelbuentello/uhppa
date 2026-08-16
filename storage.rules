@@ -4,15 +4,15 @@ service firebase.storage {
     // Public read for gallery and assets
     match /gallery/{file} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /officers/{file} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /sponsors/{file} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     // Member-only slides
     match /slides/{file} {

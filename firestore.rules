@@ -8,11 +8,11 @@ service cloud.firestore {
     }
     match /officers/{doc} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /sponsors/{doc} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     match /clubInfo/{doc} {
       allow read: if true;
@@ -20,7 +20,7 @@ service cloud.firestore {
     }
     match /gallery/{doc} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.role == 'officer';
     }
     // Members collection
     match /members/{uid} {
