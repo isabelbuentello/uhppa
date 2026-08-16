@@ -118,36 +118,44 @@ const Points = ({ tweaks }) => {
   // --- Missing points request form ---
   const [reqOpen, setReqOpen] = useState(false);
   const [reqEventId, setReqEventId] = useState('');
+  const [reqOtherTitle, setReqOtherTitle] = useState('');
+  const [reqOtherPoints, setReqOtherPoints] = useState('');
   const [reqNote, setReqNote] = useState('');
   const [reqMsg, setReqMsg] = useState('');
   const [reqErr, setReqErr] = useState('');
   const [reqSubmitting, setReqSubmitting] = useState(false);
   const { data: events } = useFirestoreQuery('events');
 
+  const isOther = reqEventId === '__other__';
+
   const submitRequest = async () => {
     setReqErr('');
     setReqMsg('');
     if (!reqEventId) { setReqErr('Select an event.'); return; }
+    if (isOther && !reqOtherTitle.trim()) { setReqErr('Describe what the points are for.'); return; }
+    if (isOther && (!reqOtherPoints || Number(reqOtherPoints) <= 0)) { setReqErr('Enter a valid point amount.'); return; }
     setReqSubmitting(true);
     try {
-      // Check for duplicate
-      const dupQ = query(collection(db, 'pointsLedger'),
-        where('memberId', '==', user.uid),
-        where('eventId', '==', reqEventId));
-      const dupSnap = await getDocs(dupQ);
-      if (!dupSnap.empty) {
-        setReqErr("You've already submitted points for this event.");
-        setReqSubmitting(false);
-        return;
+      if (!isOther) {
+        // Check for duplicate
+        const dupQ = query(collection(db, 'pointsLedger'),
+          where('memberId', '==', user.uid),
+          where('eventId', '==', reqEventId));
+        const dupSnap = await getDocs(dupQ);
+        if (!dupSnap.empty) {
+          setReqErr("You've already submitted points for this event.");
+          setReqSubmitting(false);
+          return;
+        }
       }
 
-      const event = events.find(e => e.id === reqEventId);
+      const event = isOther ? null : events.find(e => e.id === reqEventId);
       await addDoc(collection(db, 'pointsLedger'), {
         memberId: user.uid,
-        eventId: reqEventId,
-        eventTitle: event?.title || 'Unknown Event',
-        points: event?.points || 0,
-        category: event?.category || 'meeting',
+        eventId: isOther ? null : reqEventId,
+        eventTitle: isOther ? reqOtherTitle.trim() : (event?.title || 'Unknown Event'),
+        points: isOther ? Number(reqOtherPoints) : (event?.points || 0),
+        category: isOther ? 'special' : (event?.category || 'meeting'),
         semester: getSemester(),
         method: 'request',
         status: 'pending',
@@ -158,6 +166,8 @@ const Points = ({ tweaks }) => {
       });
       setReqMsg('Request submitted! An officer will review it.');
       setReqEventId('');
+      setReqOtherTitle('');
+      setReqOtherPoints('');
       setReqNote('');
     } catch (err) {
       setReqErr('Something went wrong. Try again.');
@@ -330,8 +340,23 @@ const Points = ({ tweaks }) => {
               {events.map(ev => (
                 <option key={ev.id} value={ev.id}>{ev.title} — {ev.date}</option>
               ))}
+              <option value="__other__">Other (not listed)</option>
             </select>
           </label>
+          {isOther && (
+            <>
+              <label style={{ display: 'block', marginBottom: 12 }}>
+                <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '.15em', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 6 }}>what is this for? *</span>
+                <input value={reqOtherTitle} onChange={e => setReqOtherTitle(e.target.value)} placeholder="e.g. Volunteer at health fair"
+                  style={{ width: '100%', padding: '10px 14px', border: '2px solid var(--ink)', fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 16, boxSizing: 'border-box' }} />
+              </label>
+              <label style={{ display: 'block', marginBottom: 12 }}>
+                <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '.15em', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 6 }}>points requested *</span>
+                <input type="number" min="1" value={reqOtherPoints} onChange={e => setReqOtherPoints(e.target.value)} placeholder="e.g. 10"
+                  style={{ width: 120, padding: '10px 14px', border: '2px solid var(--ink)', fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 16, boxSizing: 'border-box' }} />
+              </label>
+            </>
+          )}
           <label style={{ display: 'block', marginBottom: 12 }}>
             <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '.15em', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 6 }}>note (optional)</span>
             <input value={reqNote} onChange={e => setReqNote(e.target.value)} placeholder="e.g. I forgot to check in"

@@ -15,6 +15,7 @@ import MemberRoster from './components/MemberRoster';
 import GalleryEditor from './components/GalleryEditor';
 import OfficerEditor from './components/OfficerEditor';
 import SponsorEditor from './components/SponsorEditor';
+import SlidesEditor from './components/SlidesEditor';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -172,6 +173,11 @@ const App = () => {
           <Route path="/admin/sponsors" element={
             <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
               <SponsorEditor />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/slides" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <SlidesEditor />
             </ProtectedRoute>
           } />
         </Routes>

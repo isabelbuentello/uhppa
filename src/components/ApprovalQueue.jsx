@@ -22,7 +22,7 @@ const ApprovalQueue = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 900, margin: '0 auto' }}>
+    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Approval Queue" rotate={-1} />
 

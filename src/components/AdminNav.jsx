@@ -8,6 +8,7 @@ const tabs = [
   { path: '/admin/gallery',   label: 'Gallery' },
   { path: '/admin/officers',  label: 'Officers' },
   { path: '/admin/sponsors',  label: 'Sponsors' },
+  { path: '/admin/slides',    label: 'Slides' },
 ];
 
 const AdminNav = () => {
