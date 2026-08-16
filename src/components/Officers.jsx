@@ -2,7 +2,7 @@
 
 import { Tape, SectionHeading } from './Primitives';
 import { useFirestoreQuery } from '../hooks/useFirestore';
-import { where, orderBy } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
 
 const colors = ['var(--pink)', 'var(--blue)', 'var(--green)', 'var(--tape)', 'var(--pink)', 'var(--green)'];
 
@@ -52,7 +52,6 @@ const OfficerCard = ({ officer, index }) => {
 
 const Officers = () => {
   const { data: officers, loading } = useFirestoreQuery('officers', [
-    where('active', '==', true),
     orderBy('sortOrder'),
   ]);
 
