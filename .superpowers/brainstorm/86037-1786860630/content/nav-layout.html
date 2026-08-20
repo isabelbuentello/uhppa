@@ -1,0 +1,64 @@
+<h2>Navigation Header — Mobile Adaptation</h2>
+<p class="subtitle">How the top nav collapses across breakpoints</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Hamburger Menu</h3>
+      <p>Below 768px, nav links collapse into a hamburger icon (☰). Tapping opens a full-screen overlay with stacked links. The logo and login/logout stay visible.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;font-family:monospace;font-size:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#2a2a3a;color:#f5f0e8;border-radius:3px;">
+          <span style="font-weight:bold;">UHPPA</span>
+          <span>☰</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:#666;">Tap ☰ → full screen overlay with stacked nav links</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Scrollable Nav Row</h3>
+      <p>Nav stays visible as a horizontally scrollable row. No hamburger, no hidden content. User swipes left/right to see all tabs. Simpler, but some links may be off-screen.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;font-family:monospace;font-size:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#2a2a3a;color:#f5f0e8;border-radius:3px;">
+          <span style="font-weight:bold;">UHPPA</span>
+          <span style="font-size:10px;">hi, isabel ♡ | LOG OUT</span>
+        </div>
+        <div style="margin-top:6px;overflow:hidden;white-space:nowrap;">
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;margin-right:4px;">HOME</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;margin-right:4px;">GALLERY</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;margin-right:4px;">CALENDAR</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;margin-right:4px;">SLIDES</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;color:#999;">PO...</span>
+        </div>
+        <div style="margin-top:4px;font-size:11px;color:#666;">← swipe to see more →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Two-Row Nav</h3>
+      <p>Logo + login on top row. Nav links wrap to a second row below. Everything visible, no interaction needed. Takes more vertical space but nothing is hidden.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;font-family:monospace;font-size:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#2a2a3a;color:#f5f0e8;border-radius:3px;">
+          <span style="font-weight:bold;">UHPPA</span>
+          <span style="font-size:10px;">hi, isabel ♡ | LOG OUT</span>
+        </div>
+        <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">HOME</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">GALLERY</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">CAL</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">SLIDES</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">PTS</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;">LB</span>
+          <span style="display:inline-block;padding:4px 8px;border:1px solid #333;font-size:10px;background:#2a2a3a;color:#f5f0e8;">ADMIN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

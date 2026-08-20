@@ -1,0 +1,45 @@
+<h2>Home Page Hero — Mobile Adaptation</h2>
+<p class="subtitle">The giant UHPPA letters + subtitle + logo need to scale down for phones</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Scale Down Letters</h3>
+      <p>Keep the same collage layout but shrink the letters proportionally. 240px → 80px on phone. The 5 letters still sit side-by-side. The 2-column subtitle+logo section stacks vertically.</p>
+      <div style="margin-top:12px;padding:16px;background:#f5f0e8;border:1px solid #333;border-radius:4px;font-family:serif;max-width:300px;">
+        <div style="display:flex;gap:2px;flex-wrap:nowrap;">
+          <span style="font-size:48px;font-weight:bold;background:white;padding:2px 4px;box-shadow:2px 2px 0 rgba(0,0,0,0.1);">U</span>
+          <span style="font-size:48px;font-weight:bold;background:#2a2a3a;color:#f5f0e8;padding:2px 4px;">H</span>
+          <span style="font-size:44px;font-weight:bold;border:1px solid #333;padding:2px 4px;color:#4a9;">P</span>
+          <span style="font-size:46px;font-weight:bold;padding:2px 4px;color:transparent;-webkit-text-stroke:1px #333;">P</span>
+          <span style="font-size:48px;font-weight:bold;background:#e8d86a;padding:2px 4px;">A</span>
+        </div>
+        <p style="font-size:11px;margin-top:12px;line-height:1.4;">The University of Houston Pre-Pharmacy Association supports students pursuing careers in pharmacy...</p>
+        <div style="margin-top:10px;text-align:center;">
+          <div style="width:80px;height:80px;background:#ddd;border:1px solid #333;margin:0 auto;font-size:9px;display:grid;place-items:center;">logo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Hide Letters, Show Logo</h3>
+      <p>On phone, skip the giant letter collage entirely. Show the UHPPA logo prominently + the subtitle text + CTA buttons. Cleaner, faster to load, no tiny squished letters.</p>
+      <div style="margin-top:12px;padding:16px;background:#f5f0e8;border:1px solid #333;border-radius:4px;max-width:300px;text-align:center;">
+        <div style="width:100px;height:100px;background:#2a2a3a;border:2px solid #333;margin:0 auto;padding:4px;">
+          <div style="width:100%;height:100%;background:#ddd;display:grid;place-items:center;font-size:10px;font-family:monospace;">UHPPA crest</div>
+        </div>
+        <div style="font-family:serif;font-size:24px;font-weight:bold;margin-top:14px;">UHPPA</div>
+        <div style="font-family:monospace;font-size:8px;letter-spacing:2px;color:#666;margin-top:2px;">EST. 1995</div>
+        <p style="font-size:11px;margin-top:12px;line-height:1.4;text-align:left;">The University of Houston Pre-Pharmacy Association supports students pursuing careers in pharmacy...</p>
+        <div style="display:flex;gap:6px;margin-top:12px;">
+          <span style="flex:1;padding:6px;background:#d4837a;border:1px solid #333;font-size:9px;font-weight:bold;text-align:center;">MEMBER LOGIN →</span>
+          <span style="flex:1;padding:6px;background:white;border:1px solid #333;font-size:9px;font-weight:bold;text-align:center;">SEE CALENDAR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

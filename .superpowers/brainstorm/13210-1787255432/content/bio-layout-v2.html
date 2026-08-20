@@ -1,0 +1,76 @@
+<h2>Bio Sticky Note — Sizing Options</h2>
+<p class="subtitle">The current one is too small. Which of these feels right?</p>
+
+<div style="display:flex;flex-direction:column;gap:32px;">
+
+  <!-- Option A -->
+  <div class="mockup" data-choice="a" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">A: Full-width sticky note (spans the page)</div>
+    <div class="mockup-body" style="max-width:800px;margin:0 auto;padding:24px;background:#f5f0e8;">
+      <!-- Simulated page context -->
+      <div style="font-size:11px;color:#999;text-align:center;margin-bottom:12px;">[hero + blurb + buttons above]</div>
+      <!-- Sticky note - full width -->
+      <div style="padding:32px 36px;background:oklch(0.90 0.14 95);transform:rotate(-0.5deg);box-shadow:4px 6px 16px rgba(0,0,0,0.12);position:relative;">
+        <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:90px;height:18px;background:oklch(0.80 0.16 20);opacity:0.7;"></div>
+        <p style="font-family:cursive;font-size:17px;line-height:1.7;margin:0;color:#2a2a3a;">
+          Established in 1995, the University of Houston Pre-Pharmacy Association is a student organization dedicated to help students explore and prepare for careers in pharmacy. We provide members with opportunities to learn more about pharmacy through guest speakers, community services and collaborations with UH Pharmacy School. We encourage members to build meaningful connections with fellow pre-pharmacy students and also current pharmacy students, while gaining experience that can help them succeed both academically and professionally. We strive to support our future pharmacists through leadership, service and professional growth!
+        </p>
+      </div>
+      <div style="font-size:11px;color:#999;text-align:center;margin-top:12px;">[marquee + feature cards below]</div>
+    </div>
+    <div style="margin-top:6px;font-size:13px;color:#555;text-align:center;">
+      Stretches edge to edge. Bigger text. Simple.
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="mockup" data-choice="b" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">B: Full-width with "about us" kicker heading</div>
+    <div class="mockup-body" style="max-width:800px;margin:0 auto;padding:24px;background:#f5f0e8;">
+      <div style="font-size:11px;color:#999;text-align:center;margin-bottom:12px;">[hero + blurb + buttons above]</div>
+      <!-- Sticky note with heading -->
+      <div style="padding:32px 36px;background:oklch(0.90 0.14 95);transform:rotate(-0.5deg);box-shadow:4px 6px 16px rgba(0,0,0,0.12);position:relative;">
+        <div style="position:absolute;top:-9px;left:80px;width:90px;height:18px;background:oklch(0.80 0.16 20);opacity:0.7;transform:rotate(-6deg);"></div>
+        <div style="position:absolute;top:-9px;right:100px;width:70px;height:18px;background:oklch(0.68 0.14 145);opacity:0.7;transform:rotate(4deg);"></div>
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:oklch(0.68 0.18 20 / 0.8);margin-bottom:4px;">&#167; about us</div>
+        <div style="font-family:serif;font-size:28px;font-weight:bold;margin-bottom:14px;">Who We Are</div>
+        <p style="font-family:cursive;font-size:17px;line-height:1.7;margin:0;color:#2a2a3a;">
+          Established in 1995, the University of Houston Pre-Pharmacy Association is a student organization dedicated to help students explore and prepare for careers in pharmacy. We provide members with opportunities to learn more about pharmacy through guest speakers, community services and collaborations with UH Pharmacy School. We encourage members to build meaningful connections with fellow pre-pharmacy students and also current pharmacy students, while gaining experience that can help them succeed both academically and professionally. We strive to support our future pharmacists through leadership, service and professional growth!
+        </p>
+      </div>
+      <div style="font-size:11px;color:#999;text-align:center;margin-top:12px;">[marquee + feature cards below]</div>
+    </div>
+    <div style="margin-top:6px;font-size:13px;color:#555;text-align:center;">
+      Same full-width sticky, but with a section heading for structure.
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="mockup" data-choice="c" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">C: Replace the short blurb entirely</div>
+    <div class="mockup-body" style="max-width:800px;margin:0 auto;padding:24px;background:#f5f0e8;">
+      <div style="font-size:11px;color:#999;text-align:center;margin-bottom:12px;">[hero letters above]</div>
+      <!-- Two column: full bio left, logo right -->
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:start;">
+        <div>
+          <p style="font-size:17px;line-height:1.5;margin:0;">
+            Established in 1995, the <span style="background:oklch(0.90 0.14 95);padding:1px 4px;">University of Houston Pre-Pharmacy Association</span> is a student organization dedicated to help students explore and prepare for careers in pharmacy. We provide members with opportunities to learn more about pharmacy through <b>guest speakers</b>, <b>community services</b> and collaborations with <b>UH Pharmacy School</b>. We encourage members to build meaningful connections with fellow pre-pharmacy students and also current pharmacy students, while gaining experience that can help them succeed both academically and professionally. We strive to support our future pharmacists through <b>leadership</b>, <b>service</b> and <b>professional growth</b>!
+          </p>
+          <div style="display:flex;gap:10px;margin-top:20px;">
+            <button style="padding:10px 16px;background:oklch(0.80 0.16 20);border:2px solid #2a2a3a;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;box-shadow:3px 3px 0 #2a2a3a;">Member Login</button>
+            <button style="padding:10px 16px;background:white;border:2px solid #2a2a3a;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;box-shadow:3px 3px 0 #2a2a3a;">See the Calendar</button>
+          </div>
+        </div>
+        <div style="text-align:center;position:relative;">
+          <div style="width:200px;height:200px;background:#2a2a3a;margin:0 auto;display:grid;place-items:center;color:white;font-weight:bold;font-size:14px;transform:rotate(-3deg);box-shadow:0 10px 24px rgba(0,0,0,0.15);">UHPPA LOGO</div>
+          <div style="font-style:italic;font-size:13px;margin-top:10px;">the crest &#9825; est. 1995</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#999;text-align:center;margin-top:12px;">[marquee + feature cards below, no sticky note]</div>
+    </div>
+    <div style="margin-top:6px;font-size:13px;color:#555;text-align:center;">
+      No sticky note. Full bio replaces the short blurb directly. Clean and simple.
+    </div>
+  </div>
+
+</div>

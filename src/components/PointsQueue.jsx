@@ -83,7 +83,7 @@ const PointsQueue = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Points Queue" rotate={-1} />
 
@@ -105,7 +105,7 @@ const PointsQueue = () => {
           </div>
 
           <div style={{ marginTop: 18, border: '2px solid var(--ink)', background: 'white' }}>
-            <div style={{
+            <div className="admin-table-header" style={{
               display: 'grid', gridTemplateColumns: '40px 1fr 1fr 60px 1fr 100px 120px',
               background: 'var(--ink)', color: 'var(--paper)',
               fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
@@ -123,7 +123,7 @@ const PointsQueue = () => {
             {sorted.map((entry, i) => {
               const date = entry.createdAt?.toDate ? entry.createdAt.toDate() : new Date(entry.createdAt);
               return (
-                <div key={entry.id} style={{
+                <div key={entry.id} className="admin-table-row" style={{
                   display: 'grid', gridTemplateColumns: '40px 1fr 1fr 60px 1fr 100px 120px',
                   alignItems: 'center',
                   borderTop: i === 0 ? 'none' : '1.5px dashed var(--rule)',

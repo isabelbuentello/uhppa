@@ -1,0 +1,65 @@
+<h2>Data Tables — Mobile Adaptation</h2>
+<p class="subtitle">Admin tables have 5-7 columns. How should they work on a phone?</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Horizontal Scroll</h3>
+      <p>Wrap each table in a horizontally scrollable container. The table keeps its full desktop layout — user swipes left/right to see all columns. Simple, preserves layout, familiar pattern (like spreadsheets on mobile).</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;max-width:280px;">
+        <div style="overflow-x:auto;">
+          <div style="min-width:500px;">
+            <div style="display:grid;grid-template-columns:1fr 80px 60px 80px;background:#2a2a3a;color:#f5f0e8;font-size:9px;font-family:monospace;letter-spacing:1px;">
+              <div style="padding:6px 8px;">EVENT</div>
+              <div style="padding:6px 8px;">DATE</div>
+              <div style="padding:6px 8px;">PTS</div>
+              <div style="padding:6px 8px;">ACTIONS</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 80px 60px 80px;font-size:10px;border-top:1px dashed #999;">
+              <div style="padding:6px 8px;">Volunteer Health Fair</div>
+              <div style="padding:6px 8px;">2026-08</div>
+              <div style="padding:6px 8px;">15</div>
+              <div style="padding:6px 8px;font-size:8px;">[edit] [del]</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:10px;color:#999;margin-top:6px;">← swipe →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Card Stack</h3>
+      <p>Each row becomes a card with label:value pairs stacked vertically. No horizontal scrolling needed. More vertical space, but everything is readable without swiping.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;max-width:280px;">
+        <div style="background:white;border:1px solid #333;padding:10px;margin-bottom:8px;box-shadow:2px 2px 0 #333;">
+          <div style="font-weight:bold;font-size:13px;">Volunteer Health Fair</div>
+          <div style="display:flex;gap:12px;margin-top:6px;font-size:10px;color:#666;">
+            <span>📅 2026-08-20</span>
+            <span>⭐ 15 pts</span>
+            <span>🎯 Volunteer</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="padding:2px 6px;border:1px solid #333;font-size:9px;cursor:pointer;">edit</span>
+            <span style="padding:2px 6px;border:1px solid #d4837a;font-size:9px;color:#d4837a;cursor:pointer;">del</span>
+          </div>
+        </div>
+        <div style="background:white;border:1px solid #333;padding:10px;box-shadow:2px 2px 0 #333;">
+          <div style="font-weight:bold;font-size:13px;">Study Jam</div>
+          <div style="display:flex;gap:12px;margin-top:6px;font-size:10px;color:#666;">
+            <span>📅 2026-08-18</span>
+            <span>⭐ 5 pts</span>
+            <span>🎯 Social</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="padding:2px 6px;border:1px solid #333;font-size:9px;cursor:pointer;">edit</span>
+            <span style="padding:2px 6px;border:1px solid #d4837a;font-size:9px;color:#d4837a;cursor:pointer;">del</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

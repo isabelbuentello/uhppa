@@ -1,0 +1,78 @@
+<h2>Mobile Navigation Style</h2>
+<p class="subtitle">Which feels better than a full-screen takeover?</p>
+
+<div class="split">
+  <div class="mockup" data-choice="a" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">A: Side Drawer (from right)</div>
+    <div class="mockup-body" style="max-width:320px;margin:0 auto;position:relative;height:500px;background:#f5f0e8;overflow:hidden;border:2px solid #2a2a3a;">
+      <!-- Page content behind -->
+      <div style="padding:12px;opacity:0.3;">
+        <div style="height:44px;background:white;border-bottom:2px solid #2a2a3a;display:flex;align-items:center;padding:0 12px;justify-content:space-between;">
+          <span style="font-family:serif;font-weight:bold;font-size:16px;">UHPPA</span>
+          <span style="font-size:18px;">&#9776;</span>
+        </div>
+        <div style="margin-top:16px;text-align:center;font-family:serif;font-size:28px;font-weight:bold;">U H P P A</div>
+        <div style="margin-top:12px;height:60px;background:white;border:1px solid #ccc;"></div>
+        <div style="margin-top:8px;height:60px;background:white;border:1px solid #ccc;"></div>
+      </div>
+      <!-- Semi-transparent backdrop -->
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+      <!-- Drawer panel -->
+      <div style="position:absolute;top:0;right:0;bottom:0;width:75%;background:#f5f0e8;border-left:2px solid #2a2a3a;padding:20px;display:flex;flex-direction:column;">
+        <button style="align-self:flex-end;background:none;border:none;font-family:serif;font-size:24px;cursor:pointer;margin-bottom:20px;">&times;</button>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:#2a2a3a;color:#f5f0e8;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">HOME</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">GALLERY</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">CALENDAR</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">SLIDES</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">POINTS</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">LEADERBOARD</div>
+          <div style="margin-top:8px;padding:10px 16px;border:2px solid #2a2a3a;background:oklch(0.90 0.14 95);font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">ADMIN</div>
+          <div style="padding:10px 16px;border:2px solid #2a2a3a;background:oklch(0.80 0.16 20);font-family:sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;box-shadow:3px 3px 0 #2a2a3a;">LOG OUT</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:13px;color:#555;text-align:center;">
+      Slides in from right, ~75% width<br/>
+      Dimmed backdrop, tap outside to close
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="b" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">B: Dropdown Panel (below header)</div>
+    <div class="mockup-body" style="max-width:320px;margin:0 auto;position:relative;height:500px;background:#f5f0e8;overflow:hidden;border:2px solid #2a2a3a;">
+      <!-- Header bar -->
+      <div style="height:44px;background:oklch(0.96 0.018 85 / 0.95);border-bottom:2px solid #2a2a3a;display:flex;align-items:center;padding:0 12px;justify-content:space-between;position:relative;z-index:3;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;background:#2a2a3a;border:1.5px solid #2a2a3a;"></div>
+          <span style="font-family:serif;font-weight:bold;font-size:16px;">UHPPA</span>
+        </div>
+        <span style="font-size:18px;border:2px solid #2a2a3a;padding:2px 6px;font-weight:bold;">&#9776;</span>
+      </div>
+      <!-- Dropdown panel -->
+      <div style="background:white;border-bottom:2px solid #2a2a3a;padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);position:relative;z-index:2;">
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:#2a2a3a;color:#f5f0e8;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">HOME</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">GALLERY</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">CALENDAR</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">SLIDES</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">POINTS</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:white;font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">LEADERBOARD</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:oklch(0.90 0.14 95);font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">ADMIN</div>
+        <div style="padding:8px 14px;border:2px solid #2a2a3a;background:oklch(0.80 0.16 20);font-family:sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;">LOG OUT</div>
+      </div>
+      <!-- Page content below -->
+      <div style="padding:16px;opacity:0.5;">
+        <div style="text-align:center;font-family:serif;font-size:28px;font-weight:bold;margin-top:8px;">U H P P A</div>
+        <div style="margin-top:16px;font-size:12px;line-height:1.5;color:#555;">
+          The <b>University of Houston Pre-Pharmacy Association</b> supports students pursuing careers in pharmacy...
+        </div>
+        <div style="margin-top:12px;height:40px;background:white;border:1px solid #ccc;"></div>
+        <div style="margin-top:8px;height:40px;background:white;border:1px solid #ccc;"></div>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:13px;color:#555;text-align:center;">
+      Drops down from header, wraps like tags<br/>
+      Page content still visible below
+    </div>
+  </div>
+</div>

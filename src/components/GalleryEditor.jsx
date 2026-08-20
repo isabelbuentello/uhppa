@@ -115,7 +115,7 @@ const GalleryEditor = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Gallery" rotate={-1} />
 
@@ -175,7 +175,7 @@ const GalleryEditor = () => {
 
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={photoIds} strategy={rectSortingStrategy}>
-              <div style={{
+              <div className="editor-photo-grid" style={{
                 marginTop: 14, display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)', gap: 18,
               }}>

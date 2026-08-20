@@ -125,7 +125,7 @@ const Slides = () => {
   }
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
       <SectionHeading kicker="archive" title="Slides & PDFs" rotate={-1} />
       <p style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 18, maxWidth: 620, marginTop: 16, color: 'var(--ink-soft)' }}>
         Every UHPPA deck, filed, stamped &amp; taped up. Click any card to download the PDF.
@@ -163,7 +163,7 @@ const Slides = () => {
       </div>
 
       {/* Grid */}
-      <div style={{ marginTop: 36, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32 }}>
+      <div className="slides-grid" style={{ marginTop: 36, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32 }}>
         {filtered.map((d, i) => <DeckCard key={d.id} deck={d} rot={(i % 3 - 1) * 1.3} />)}
       </div>
 

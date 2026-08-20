@@ -121,7 +121,7 @@ const EventEditor = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Events" rotate={-1} />
 
@@ -139,7 +139,7 @@ const EventEditor = () => {
             {editing === 'new' ? 'new event' : 'edit event'}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="admin-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <label>
               <span style={labelStyle}>title *</span>
               <input value={form.title} onChange={e => set('title', e.target.value)} style={inputStyle} placeholder="e.g. General Meeting" />
@@ -185,7 +185,7 @@ const EventEditor = () => {
 
       {/* Event Table */}
       <div style={{ marginTop: 28, border: '2px solid var(--ink)', background: 'white' }}>
-        <div style={{
+        <div className="admin-table-header" style={{
           display: 'grid', gridTemplateColumns: '1fr 100px 80px 60px 120px 120px',
           background: 'var(--ink)', color: 'var(--paper)',
           fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
@@ -198,7 +198,7 @@ const EventEditor = () => {
           <div style={{ padding: '10px 16px' }}>Actions</div>
         </div>
         {sorted.map((event, i) => (
-          <div key={event.id} style={{
+          <div key={event.id} className="admin-table-row" style={{
             display: 'grid', gridTemplateColumns: '1fr 100px 80px 60px 120px 120px',
             alignItems: 'center',
             borderTop: i === 0 ? 'none' : '1.5px dashed var(--rule)',

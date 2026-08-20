@@ -78,23 +78,23 @@ const EventModal = ({ event, onClose }) => {
 };
 
 const Cell = ({ d, events, isLast, isBottom, onEventClick }) => {
-  if (!d) return <div style={{
+  if (!d) return <div className="cal-cell" style={{
     minHeight: 120, background: 'var(--paper-2)',
     borderRight: isLast ? 'none' : '2px solid var(--ink)',
     borderBottom: isBottom ? 'none' : '2px solid var(--ink)',
     backgroundImage: 'repeating-linear-gradient(45deg, transparent 0 6px, oklch(0.86 0.03 85) 6px 7px)',
   }} />;
   return (
-    <div style={{
+    <div className="cal-cell" style={{
       minHeight: 120, padding: 8, position: 'relative',
       borderRight: isLast ? 'none' : '2px solid var(--ink)',
       borderBottom: isBottom ? 'none' : '2px solid var(--ink)',
       background: 'white',
     }}>
-      <div style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 20, lineHeight: 1 }}>{d}</div>
+      <div className="cal-day-num" style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 20, lineHeight: 1 }}>{d}</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 6 }}>
         {events.map((e, i) => (
-          <div key={e.id || i} onClick={() => onEventClick(e)} style={{
+          <div key={e.id || i} className="cal-event-chip" onClick={() => onEventClick(e)} style={{
             background: cmap(e.color),
             color: e.color === 'ink' ? 'var(--paper)' : 'var(--ink)',
             padding: '3px 6px',
@@ -112,6 +112,19 @@ const Cell = ({ d, events, isLast, isBottom, onEventClick }) => {
           </div>
         ))}
       </div>
+      {/* Colored dots — shown on mobile by CSS */}
+      {events.length > 0 && (
+        <div className="cal-event-dot" onClick={() => onEventClick(events[0])} style={{
+          display: 'none', gap: 2, marginTop: 4, flexWrap: 'wrap', cursor: 'pointer',
+        }}>
+          {events.map((e, i) => (
+            <span key={e.id || i} style={{
+              width: 6, height: 6, borderRadius: '50%',
+              background: cmap(e.color), border: '1px solid var(--ink)',
+            }} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -171,24 +184,24 @@ const Calendar = ({ tweaks }) => {
   const title = `${MONTH_NAMES[month]} ${year}`;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
       <SectionHeading kicker="calendar" title={title} rotate={-1} />
       <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-        <button onClick={prev} style={arrowBtn}>&larr; prev</button>
-        <button onClick={() => { setMonth(now.getMonth()); setYear(now.getFullYear()); }} style={arrowBtn}>today</button>
-        <button onClick={next} style={arrowBtn}>next &rarr;</button>
-        <span style={{ marginLeft: 'auto', fontFamily: "'Kalam', cursive", fontSize: 20, color: 'var(--margin)' }}>
+        <button className="calendar-nav-btn" onClick={prev} style={arrowBtn}>&larr; prev</button>
+        <button className="calendar-nav-btn" onClick={() => { setMonth(now.getMonth()); setYear(now.getFullYear()); }} style={arrowBtn}>today</button>
+        <button className="calendar-nav-btn" onClick={next} style={arrowBtn}>next &rarr;</button>
+        <span className="calendar-hint" style={{ marginLeft: 'auto', fontFamily: "'Kalam', cursive", fontSize: 20, color: 'var(--margin)' }}>
           click an event for details &#9998;
         </span>
       </div>
 
       {/* Day headers */}
-      <div style={{
+      <div className="calendar-grid" style={{
         marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)',
         gap: 0, border: '2px solid var(--ink)', background: 'white',
       }}>
         {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((d, i) => (
-          <div key={d} style={{
+          <div key={d} className="cal-day-header" style={{
             padding: '10px 12px',
             borderRight: i < 6 ? '2px solid var(--ink)' : 'none',
             borderBottom: '2px solid var(--ink)',

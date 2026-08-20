@@ -84,7 +84,7 @@ const SponsorEditor = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Sponsors" rotate={-1} />
 
@@ -100,7 +100,7 @@ const SponsorEditor = () => {
           <div style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 22, marginBottom: 18 }}>
             {editing === 'new' ? 'new sponsor' : 'edit sponsor'}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="admin-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <label>
               <span style={labelStyle}>name *</span>
               <input value={form.name} onChange={e => set('name', e.target.value)} style={inputStyle} placeholder="e.g. CVS Health" />
@@ -131,7 +131,7 @@ const SponsorEditor = () => {
         </div>
       ) : (
         <div style={{ marginTop: 28, border: '2px solid var(--ink)', background: 'white' }}>
-          <div style={{
+          <div className="admin-table-header" style={{
             display: 'grid', gridTemplateColumns: '50px 1fr 1fr 120px',
             background: 'var(--ink)', color: 'var(--paper)',
             fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
@@ -142,7 +142,7 @@ const SponsorEditor = () => {
             <div style={{ padding: '10px 16px' }}>Actions</div>
           </div>
           {sponsors.map((sponsor, i) => (
-            <div key={sponsor.id} style={{
+            <div key={sponsor.id} className="admin-table-row" style={{
               display: 'grid', gridTemplateColumns: '50px 1fr 1fr 120px',
               alignItems: 'center',
               borderTop: i === 0 ? 'none' : '1.5px dashed var(--rule)',

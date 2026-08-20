@@ -61,7 +61,7 @@ const Officers = () => {
     <div style={{ marginTop: 80 }}>
       <SectionHeading kicker="the board" title="Meet the officers." rotate={-1} />
       {officers.length > 0 ? (
-        <div style={{
+        <div className="officers-grid" style={{
           marginTop: 36, display: 'grid', gap: 28,
           gridTemplateColumns: 'repeat(3, 1fr)',
         }}>

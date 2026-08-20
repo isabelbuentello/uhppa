@@ -88,7 +88,7 @@ const SignUp = ({ close, onSignInClick }) => {
       <div onClick={e => e.stopPropagation()} style={{ position: 'relative', transform: 'rotate(-1.2deg)' }}>
         <Tape r={-10} color="var(--green)" w={130} style={{ top: -12, left: 80 }} />
         <Tape r={6} color="var(--tape)" w={110} style={{ top: -8, right: 60 }} />
-        <form onSubmit={submit} style={{
+        <form className="modal-box" onSubmit={submit} style={{
           width: 460, background: 'white', border: '2px solid var(--ink)',
           boxShadow: '10px 10px 0 var(--ink)',
           padding: '34px 34px 28px',

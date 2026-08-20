@@ -16,7 +16,7 @@ const AdminNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{
+    <div className="admin-nav" style={{
       display: 'flex', gap: 8, marginBottom: 28, flexWrap: 'wrap',
     }}>
       {tabs.map(t => {

@@ -13,7 +13,7 @@ const Podium = ({ rank, name, points, h, color, rot, crown }) => (
         fontSize: 56, lineHeight: 1,
       }}>&#9819;</div>
     )}
-    <div style={{
+    <div className="podium-card" style={{
       width: 160, height: 170, margin: '0 auto 14px', padding: 10,
       background: 'white', border: '2px solid var(--ink)',
       boxShadow: '4px 4px 0 var(--ink)', transform: `rotate(${rot}deg)`,
@@ -28,14 +28,14 @@ const Podium = ({ rank, name, points, h, color, rot, crown }) => (
       <div style={{ fontFamily: "'Kalam', cursive", fontSize: 15, marginTop: 4 }}>{name.split(' ')[0]}</div>
     </div>
 
-    <div style={{
+    <div className="podium-bar" style={{
       background: color, border: '2px solid var(--ink)',
       boxShadow: '5px 5px 0 var(--ink)',
       padding: '18px 10px',
       height: h,
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start',
     }}>
-      <span style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 72, lineHeight: 1 }}>#{rank}</span>
+      <span className="podium-rank" style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 72, lineHeight: 1 }}>#{rank}</span>
       <span style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 700, fontSize: 18, marginTop: 6 }}>{name}</span>
       <span style={{ marginTop: 'auto', fontFamily: "'Alfa Slab One', serif", fontSize: 36 }}>{points} pts</span>
     </div>
@@ -101,7 +101,7 @@ const Leaderboard = ({ tweaks }) => {
   }
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
       <SectionHeading kicker="hall of fame" title="Leaderboard" rotate={-1} />
       <div style={{ display: 'flex', gap: 10, marginTop: 18, alignItems: 'center' }}>
         {['semester', 'all-time', 'monthly'].map(s => (
@@ -127,7 +127,7 @@ const Leaderboard = ({ tweaks }) => {
         <>
           {/* Podium */}
           {top3.length > 0 && (
-            <div style={{ marginTop: 52, display: 'grid', gridTemplateColumns: `repeat(${Math.min(top3.length, 3)}, 1fr)`, gap: 24, alignItems: 'end' }}>
+            <div className="podium-grid" style={{ marginTop: 52, display: 'grid', gridTemplateColumns: `repeat(${Math.min(top3.length, 3)}, 1fr)`, gap: 24, alignItems: 'end' }}>
               {top3.length > 1 && <Podium rank={2} name={top3[1].name} points={top3[1].points} h={200} color="var(--blue)" rot={-3} />}
               {top3.length > 0 && <Podium rank={1} name={top3[0].name} points={top3[0].points} h={270} color="var(--pink)" rot={0} crown />}
               {top3.length > 2 && <Podium rank={3} name={top3[2].name} points={top3[2].points} h={170} color="var(--green)" rot={3} />}
@@ -142,7 +142,7 @@ const Leaderboard = ({ tweaks }) => {
               </div>
               <div style={{ marginTop: 18, background: 'white', border: '2px solid var(--ink)', boxShadow: '6px 6px 0 var(--ink)' }}>
                 {rest.map((r, i) => (
-                  <div key={r.id} style={{
+                  <div key={r.id} className="rankings-row" style={{
                     display: 'grid',
                     gridTemplateColumns: '80px 1fr 120px',
                     alignItems: 'center',

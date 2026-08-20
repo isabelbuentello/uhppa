@@ -34,6 +34,7 @@ const App = () => {
   const [tweakVisible, setTweakVisible] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const go = (t) => {
     if (t === 'login') { setLoginOpen(true); return; }
@@ -74,7 +75,7 @@ const App = () => {
         backdropFilter: 'blur(6px)',
         borderBottom: '2px solid var(--ink)',
       }}>
-        <div style={{
+        <div className="site-header-inner" style={{
           maxWidth: 1400, margin: '0 auto',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '14px 48px',
@@ -89,7 +90,7 @@ const App = () => {
             </div>
           </Link>
 
-          <nav style={{ display: 'flex', gap: 10 }}>
+          <nav className="nav-links" style={{ display: 'flex', gap: 10 }}>
             {tabs.map((t, i) => (
               <NavBtn key={t.id} active={isActive(t.path)} onClick={() => navigate(t.path)} rotate={(i % 2 ? 0.5 : -0.5)}>
                 {t.label}
@@ -116,8 +117,73 @@ const App = () => {
               </NavBtn>
             ))}
           </nav>
+
+          {/* Hamburger button — visible on mobile only */}
+          <button className="hamburger-btn" onClick={() => setMenuOpen(true)} style={{
+            background: 'none', border: '2px solid var(--ink)', padding: '6px 10px',
+            fontFamily: "'Archivo Black', sans-serif", fontSize: 18, cursor: 'pointer',
+            boxShadow: '2px 2px 0 var(--ink)',
+          }}>&#9776;</button>
+
         </div>
       </header>
+
+      {/* Mobile nav overlay — outside header to escape its stacking context */}
+      {menuOpen && (
+        <div className="mobile-nav-overlay" style={{
+          position: 'fixed', inset: 0, zIndex: 100,
+          background: 'var(--paper)',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center', gap: 16,
+        }}>
+          <button onClick={() => setMenuOpen(false)} style={{
+            position: 'absolute', top: 16, right: 16,
+            background: 'none', border: 'none', cursor: 'pointer',
+            fontFamily: "'Alfa Slab One', serif", fontSize: 28, color: 'var(--ink)',
+          }}>&times;</button>
+          {tabs.map(t => (
+            <button key={t.id} onClick={() => { navigate(t.path); setMenuOpen(false); }} style={{
+              padding: '12px 28px',
+              border: '2px solid var(--ink)',
+              background: isActive(t.path) ? 'var(--ink)' : 'white',
+              color: isActive(t.path) ? 'var(--paper)' : 'var(--ink)',
+              fontFamily: "'Archivo Black', sans-serif",
+              letterSpacing: '.1em', textTransform: 'uppercase', fontSize: 14,
+              cursor: 'pointer', boxShadow: '3px 3px 0 var(--ink)',
+              width: 220,
+            }}>{t.label}</button>
+          ))}
+          {!loading && user && role === 'officer' && (
+            <button onClick={() => { navigate('/admin/approvals'); setMenuOpen(false); }} style={{
+              padding: '12px 28px',
+              border: '2px solid var(--ink)', background: 'var(--tape)',
+              fontFamily: "'Archivo Black', sans-serif",
+              letterSpacing: '.1em', textTransform: 'uppercase', fontSize: 14,
+              cursor: 'pointer', boxShadow: '3px 3px 0 var(--ink)',
+              width: 220,
+            }}>Admin</button>
+          )}
+          {!loading && (user ? (
+            <button onClick={() => { signOut(); setMenuOpen(false); }} style={{
+              padding: '12px 28px',
+              border: '2px solid var(--ink)', background: 'var(--pink)',
+              fontFamily: "'Archivo Black', sans-serif",
+              letterSpacing: '.1em', textTransform: 'uppercase', fontSize: 14,
+              cursor: 'pointer', boxShadow: '3px 3px 0 var(--ink)',
+              width: 220,
+            }}>Log Out</button>
+          ) : (
+            <button onClick={() => { setLoginOpen(true); setMenuOpen(false); }} style={{
+              padding: '12px 28px',
+              border: '2px solid var(--ink)', background: 'var(--green)',
+              fontFamily: "'Archivo Black', sans-serif",
+              letterSpacing: '.1em', textTransform: 'uppercase', fontSize: 14,
+              cursor: 'pointer', boxShadow: '3px 3px 0 var(--ink)',
+              width: 220,
+            }}>&#10022; Login</button>
+          ))}
+        </div>
+      )}
 
       {/* Page body */}
       <main>

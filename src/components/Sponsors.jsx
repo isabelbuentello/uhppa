@@ -42,7 +42,7 @@ const Sponsors = () => {
     <div style={{ marginTop: 80 }}>
       <SectionHeading kicker="our partners" title="Sponsors." rotate={-1} />
       {sponsors.length > 0 ? (
-        <div style={{
+        <div className="sponsors-grid" style={{
           marginTop: 28, display: 'grid', gap: 14,
           gridTemplateColumns: 'repeat(4, 1fr)',
         }}>

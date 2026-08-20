@@ -60,7 +60,7 @@ const Gallery = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
       <SectionHeading kicker="memories" title="Photo Gallery" rotate={-1} />
       <p style={{
         fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 18,
@@ -70,7 +70,7 @@ const Gallery = () => {
       </p>
 
       {photos.length > 0 ? (
-        <div style={{
+        <div className="gallery-grid" style={{
           marginTop: 36, display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)', gap: 32,
         }}>
@@ -98,7 +98,7 @@ const Gallery = () => {
             backdropFilter: 'blur(4px)', cursor: 'pointer',
           }}
         >
-          <div onClick={e => e.stopPropagation()} style={{
+          <div className="lightbox-inner" onClick={e => e.stopPropagation()} style={{
             background: 'white', border: '2px solid var(--ink)',
             boxShadow: '10px 10px 0 var(--ink)', padding: 16, maxWidth: 700,
             transform: 'rotate(-1deg)',

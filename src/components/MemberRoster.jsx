@@ -39,7 +39,7 @@ const MemberRow = ({ member, isYou, user, changeRole, i }) => {
     ? member.createdAt.toDate().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })
     : '—';
   return (
-    <div style={{
+    <div className="admin-table-row" style={{
       display: 'grid', gridTemplateColumns: gridCols,
       alignItems: 'center',
       borderTop: i === 0 ? 'none' : '1.5px dashed var(--rule)',
@@ -74,7 +74,7 @@ const MemberRow = ({ member, isYou, user, changeRole, i }) => {
 };
 
 const TableHeader = () => (
-  <div style={headerStyle}>
+  <div className="admin-table-header" style={headerStyle}>
     <div style={{ padding: '10px 16px' }}>Name</div>
     <div style={{ padding: '10px 16px' }}>Email</div>
     <div style={{ padding: '10px 16px' }}>Class</div>
@@ -128,7 +128,7 @@ const MemberRoster = () => {
   if (loading) return null;
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Members" rotate={-1} />
 

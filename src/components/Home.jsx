@@ -58,7 +58,7 @@ const Home = ({ go, tweaks }) => {
   const socials = clubInfo?.socials;
 
   return (
-    <div style={{ position: 'relative', padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
+    <div className="page-container" style={{ position: 'relative', padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
 
       {/* Top meta row */}
       <div style={{
@@ -76,7 +76,7 @@ const Home = ({ go, tweaks }) => {
       <div style={{ position:'relative', marginTop: 28, minHeight: 520 }}>
 
         {/* Big UHPPA wordmark — collage */}
-        <div style={{ position:'relative', display:'flex', alignItems:'flex-start', gap: 0, flexWrap:'wrap' }}>
+        <div className="hero-letters" style={{ position:'relative', display:'flex', alignItems:'flex-start', gap: 0, flexWrap:'wrap' }}>
 
           {/* U on cream tag */}
           <div style={{ position:'relative', marginRight: -6 }}>
@@ -154,13 +154,13 @@ const Home = ({ go, tweaks }) => {
         </div>
 
         {/* Subtitle paragraph */}
-        <div style={{ display:'grid', gridTemplateColumns:'1.1fr 1fr', gap: 40, marginTop: 48, alignItems:'start' }}>
+        <div className="hero-subtitle-grid" style={{ display:'grid', gridTemplateColumns:'1.1fr 1fr', gap: 40, marginTop: 48, alignItems:'start' }}>
           <div style={{ position:'relative' }}>
             <p style={{
               fontFamily: "'Bricolage Grotesque', sans-serif",
               fontSize: 26, lineHeight: 1.35, margin: 0, maxWidth: 620,
             }}>
-              The <Highlight color="var(--tape)">University of Houston Pre-Pharmacy Association</Highlight> supports students pursuing careers in pharmacy &mdash; through <b>networking</b>, <b>volunteer opportunities</b>, and <b>pharmacy school application guidance</b>. Since <b>1995</b>.
+              Established in 1995, the <Highlight color="var(--tape)">University of Houston Pre-Pharmacy Association</Highlight> is a student organization dedicated to help students explore and prepare for careers in pharmacy. We provide members with opportunities to learn more about pharmacy through <b>guest speakers</b>, <b>community services</b> and collaborations with <b>UH Pharmacy School</b>. We encourage members to build meaningful connections with fellow pre-pharmacy students and also current pharmacy students, while gaining experience that can help them succeed both academically and professionally. We strive to support our future pharmacists through <b>leadership</b>, <b>service</b> and <b>professional growth</b>!
             </p>
             {tweaks.showAnnotations && (
               <div style={{ position:'absolute', top: -30, right: -10, fontFamily:"'Kalam', cursive", color:'var(--margin)', fontSize: 20, transform:'rotate(-6deg)' }}>
@@ -244,7 +244,7 @@ const Home = ({ go, tweaks }) => {
       {/* Four feature cards — magazine cut-outs */}
       <div style={{ marginTop: 64 }}>
         <SectionHeading kicker="what we do" title="Club, but make it organized." rotate={-1}/>
-        <div style={{
+        <div className="feature-grid" style={{
           marginTop: 36, display:'grid', gap: 28,
           gridTemplateColumns:'repeat(4, 1fr)',
         }}>
@@ -256,7 +256,7 @@ const Home = ({ go, tweaks }) => {
       </div>
 
       {/* Strip: numbers */}
-      <div style={{
+      <div className="stats-strip" style={{
         marginTop: 80,
         display:'grid', gridTemplateColumns:'repeat(4,1fr)',
         border:'2px solid var(--ink)', background:'white',
@@ -271,7 +271,7 @@ const Home = ({ go, tweaks }) => {
             padding: '26px 20px', borderRight: i<3 ? '2px solid var(--ink)' : 'none',
             textAlign:'center',
           }}>
-            <div style={{ fontFamily:"'Alfa Slab One', serif", fontSize: 56, lineHeight:1, color:'var(--ink)' }}>{n}</div>
+            <div className="stat-number" style={{ fontFamily:"'Alfa Slab One', serif", fontSize: 56, lineHeight:1, color:'var(--ink)' }}>{n}</div>
             <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, letterSpacing:'.15em', textTransform:'uppercase', marginTop: 6, color:'var(--ink-soft)' }}>{l}</div>
           </div>
         ))}

@@ -1,0 +1,72 @@
+<h2>Calendar — Mobile Adaptation</h2>
+<p class="subtitle">The 7-column month grid won't fit on a phone. How should it adapt?</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Compact Mini-Grid</h3>
+      <p>Keep the 7-column grid but shrink cells to bare minimum — just the day number and colored dots for events (no text). Tapping a day opens the event modal. Like a phone calendar app.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;max-width:280px;">
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-size:9px;font-family:monospace;text-align:center;">
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">S</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">M</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">T</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">W</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">T</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">F</div>
+          <div style="padding:3px;background:#2a2a3a;color:#f5f0e8;">S</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;"></div>
+          <div style="padding:4px;background:white;border:1px solid #eee;"></div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">1</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">2</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">3<div style="display:flex;gap:1px;justify-content:center;margin-top:2px;"><span style="width:4px;height:4px;border-radius:50%;background:#d4837a;"></span></div></div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">4</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">5</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">6</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">7<div style="display:flex;gap:1px;justify-content:center;margin-top:2px;"><span style="width:4px;height:4px;border-radius:50%;background:#4a9;"></span><span style="width:4px;height:4px;border-radius:50%;background:#d4837a;"></span></div></div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">8</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">9</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">10</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">11</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">12<div style="display:flex;gap:1px;justify-content:center;margin-top:2px;"><span style="width:4px;height:4px;border-radius:50%;background:#5a8fcf;"></span></div></div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">13</div>
+          <div style="padding:4px;background:white;border:1px solid #eee;">14</div>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:#666;">Tap a day with dots → event modal opens</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>List View</h3>
+      <p>Replace the grid entirely with a chronological list of upcoming events for the month. Each event is a tappable card. Simpler, more readable, shows full event names.</p>
+      <div style="margin-top:12px;padding:12px;background:#f5f0e8;border:1px solid #333;border-radius:4px;max-width:280px;">
+        <div style="font-family:serif;font-weight:bold;font-size:16px;margin-bottom:10px;">August 2026</div>
+        <div style="background:white;border:1px solid #333;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:bold;font-size:12px;">Volunteer Health Fair</div>
+            <div style="font-size:10px;color:#666;">Aug 3 · 6:00 PM</div>
+          </div>
+          <div style="background:#d4837a;border:1px solid #333;padding:2px 6px;font-size:9px;font-weight:bold;">+15</div>
+        </div>
+        <div style="background:white;border:1px solid #333;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:bold;font-size:12px;">Study Jam</div>
+            <div style="font-size:10px;color:#666;">Aug 7 · 5:30 PM</div>
+          </div>
+          <div style="background:#4a9;border:1px solid #333;padding:2px 6px;font-size:9px;font-weight:bold;">+5</div>
+        </div>
+        <div style="background:white;border:1px solid #333;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:bold;font-size:12px;">Blood Drive</div>
+            <div style="font-size:10px;color:#666;">Aug 12 · 9:00 AM</div>
+          </div>
+          <div style="background:#5a8fcf;border:1px solid #333;padding:2px 6px;font-size:9px;font-weight:bold;">+10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

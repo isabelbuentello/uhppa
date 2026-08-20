@@ -184,10 +184,10 @@ const Points = ({ tweaks }) => {
   }
 
   return (
-    <div style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
+    <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1300, margin: '0 auto' }}>
       <SectionHeading kicker="your file" title="Points tracker" rotate={-1} />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 40, marginTop: 32 }}>
+      <div className="points-layout" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 40, marginTop: 32 }}>
         {/* Left: big stat card */}
         <div style={{ position: 'relative' }}>
           <Tape r={-8} color="var(--pink)" w={110} style={{ top: -12, left: 40 }} />
@@ -198,13 +198,13 @@ const Points = ({ tweaks }) => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>{currentSemester} &middot; active</div>
-                <div style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 42, lineHeight: 1, marginTop: 6 }}>{user?.displayName || 'Member'}</div>
+                <div className="points-name" style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 42, lineHeight: 1, marginTop: 6 }}>{user?.displayName || 'Member'}</div>
               </div>
             </div>
 
             {/* Big number */}
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, marginTop: 28 }}>
-              <span style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 130, lineHeight: .85 }}>{total}</span>
+              <span className="points-total" style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 130, lineHeight: .85 }}>{total}</span>
               <span style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 22, color: 'var(--ink-soft)' }}>/ {semesterGoal} pts</span>
             </div>
 
@@ -292,7 +292,7 @@ const Points = ({ tweaks }) => {
       </div>
 
       {/* Action buttons */}
-      <div style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+      <div className="points-actions" style={{ marginTop: 36, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
         <button onClick={() => { setCodeOpen(!codeOpen); setReqOpen(false); }} style={{
           border: '2px solid var(--ink)', background: codeOpen ? 'var(--ink)' : 'var(--green)',
           color: codeOpen ? 'var(--paper)' : 'var(--ink)',
@@ -382,7 +382,7 @@ const Points = ({ tweaks }) => {
           </div>
         ) : (
           <div style={{ marginTop: 18, border: '2px solid var(--ink)', background: 'white' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr 120px 120px', background: 'var(--ink)', color: 'var(--paper)', fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase' }}>
+            <div className="activity-table-header" style={{ display: 'grid', gridTemplateColumns: '120px 1fr 120px 120px', background: 'var(--ink)', color: 'var(--paper)', fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase' }}>
               <div style={{ padding: '10px 16px' }}>Date</div>
               <div style={{ padding: '10px 16px' }}>Event</div>
               <div style={{ padding: '10px 16px' }}>Points</div>
@@ -391,7 +391,7 @@ const Points = ({ tweaks }) => {
             {semesterEntries.map((r, i) => {
               const date = r.createdAt?.toDate ? r.createdAt.toDate() : new Date(r.createdAt);
               return (
-                <div key={r.id} style={{
+                <div key={r.id} className="activity-table-row" style={{
                   display: 'grid', gridTemplateColumns: '120px 1fr 120px 120px',
                   borderTop: i === 0 ? 'none' : '1.5px dashed oklch(0.8 0.03 240)',
                   fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 15,
