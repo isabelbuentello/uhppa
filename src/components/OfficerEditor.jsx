@@ -82,6 +82,17 @@ const OfficerEditor = () => {
     await deleteDoc(doc(db, 'officers', officer.id));
   };
 
+  const move = async (index, direction) => {
+    const target = index + direction;
+    if (target < 0 || target >= officers.length) return;
+    const a = officers[index];
+    const b = officers[target];
+    await Promise.all([
+      updateDoc(doc(db, 'officers', a.id), { sortOrder: b.sortOrder }),
+      updateDoc(doc(db, 'officers', b.id), { sortOrder: a.sortOrder }),
+    ]);
+  };
+
   if (loading) return null;
 
   return (
@@ -133,7 +144,7 @@ const OfficerEditor = () => {
       {/* Officer list */}
       <div style={{ marginTop: 28, border: '2px solid var(--ink)', background: 'white' }}>
         <div className="admin-table-header" style={{
-          display: 'grid', gridTemplateColumns: '60px 1fr 1fr 1fr 120px',
+          display: 'grid', gridTemplateColumns: '60px 1fr 1fr 1fr 60px 120px',
           background: 'var(--ink)', color: 'var(--paper)',
           fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
         }}>
@@ -141,11 +152,12 @@ const OfficerEditor = () => {
           <div style={{ padding: '10px 16px' }}>Name</div>
           <div style={{ padding: '10px 16px' }}>Position</div>
           <div style={{ padding: '10px 16px' }}>Bio</div>
+          <div style={{ padding: '10px 16px' }}>Order</div>
           <div style={{ padding: '10px 16px' }}>Actions</div>
         </div>
         {officers.map((officer, i) => (
           <div key={officer.id} className="admin-table-row" style={{
-            display: 'grid', gridTemplateColumns: '60px 1fr 1fr 1fr 120px',
+            display: 'grid', gridTemplateColumns: '60px 1fr 1fr 1fr 60px 120px',
             alignItems: 'center',
             borderTop: i === 0 ? 'none' : '1.5px dashed var(--rule)',
             fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 14,
@@ -165,6 +177,18 @@ const OfficerEditor = () => {
             <div style={{ padding: '10px 16px', color: 'var(--ink-soft)' }}>{officer.position}</div>
             <div style={{ padding: '10px 16px', fontSize: 12, color: 'var(--ink-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {officer.bio || '—'}
+            </div>
+            <div style={{ padding: '10px 12px', display: 'flex', gap: 4 }}>
+              <button onClick={() => move(i, -1)} disabled={i === 0} style={{
+                background: 'none', border: '1.5px solid var(--ink)', padding: '4px 6px',
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 13, cursor: i === 0 ? 'default' : 'pointer',
+                opacity: i === 0 ? 0.3 : 1,
+              }}>&uarr;</button>
+              <button onClick={() => move(i, 1)} disabled={i === officers.length - 1} style={{
+                background: 'none', border: '1.5px solid var(--ink)', padding: '4px 6px',
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 13, cursor: i === officers.length - 1 ? 'default' : 'pointer',
+                opacity: i === officers.length - 1 ? 0.3 : 1,
+              }}>&darr;</button>
             </div>
             <div style={{ padding: '10px 16px', display: 'flex', gap: 6 }}>
               <button onClick={() => openEdit(officer)} style={{
