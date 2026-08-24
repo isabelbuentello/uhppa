@@ -1,0 +1,121 @@
+<h2>Social Links Admin Editor</h2>
+<p class="subtitle">Where should officers manage the club's social links?</p>
+
+<div style="display:flex;flex-direction:column;gap:32px;">
+
+  <!-- Option A -->
+  <div class="mockup" data-choice="a" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">A: Dedicated "Club Info" admin tab</div>
+    <div class="mockup-body" style="max-width:600px;margin:0 auto;padding:20px;background:#f5f0e8;">
+      <!-- Admin nav -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;">
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Approvals</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Events</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Points</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Members</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Gallery</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Officers</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Sponsors</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:#2a2a3a;color:#f5f0e8;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Club Info</span>
+      </div>
+      <!-- Section heading -->
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:oklch(0.68 0.18 20 / 0.8);">&#167; club settings</div>
+      <div style="font-family:serif;font-size:28px;font-weight:bold;">Club Info</div>
+      <!-- Social links form -->
+      <div style="margin-top:20px;background:white;border:2px solid #2a2a3a;padding:20px;box-shadow:4px 4px 0 #2a2a3a;">
+        <div style="font-family:sans-serif;font-weight:bold;font-size:14px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Social Links</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Instagram URL</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://instagram.com/uhppa</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Email</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">uhppa@uh.edu</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Linktree URL</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://linktr.ee/uhppa</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Discord URL</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://discord.gg/...</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;border-top:1.5px dashed #ccc;padding-top:16px;">
+          <div style="font-family:sans-serif;font-weight:bold;font-size:14px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Stats (shown on homepage)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Active Members</label>
+              <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">127</div>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Years Running</label>
+              <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">31</div>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Events Per Year</label>
+              <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">52</div>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Volunteer Hours</label>
+              <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">2,340</div>
+            </div>
+          </div>
+        </div>
+        <button style="margin-top:20px;padding:10px 20px;background:oklch(0.68 0.14 145);border:2px solid #2a2a3a;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:3px 3px 0 #2a2a3a;">Save Changes</button>
+      </div>
+    </div>
+    <div style="margin-top:6px;font-size:13px;color:#555;text-align:center;">
+      New admin tab. Manages socials + homepage stats in one place.<br/>
+      Could also hold semester goal, points guide, and other club settings later.
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="mockup" data-choice="b" onclick="toggleSelect(this)" style="cursor:pointer;">
+    <div class="mockup-header">B: Add socials section to an existing admin page</div>
+    <div class="mockup-body" style="max-width:600px;margin:0 auto;padding:20px;background:#f5f0e8;">
+      <!-- Admin nav -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;">
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Approvals</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Events</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Points</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:#2a2a3a;color:#f5f0e8;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Members</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Gallery</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Officers</span>
+        <span style="padding:6px 12px;border:2px solid #2a2a3a;background:white;font-size:10px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Sponsors</span>
+      </div>
+      <div style="font-family:serif;font-size:28px;font-weight:bold;">Members</div>
+      <div style="font-size:12px;color:#999;margin:8px 0 16px;">[member roster table here...]</div>
+      <!-- Social links tacked on at bottom -->
+      <div style="border-top:2px dashed oklch(0.72 0.05 240 / 0.55);margin-top:20px;padding-top:20px;">
+        <div style="font-family:serif;font-size:20px;font-weight:bold;margin-bottom:12px;">Social Links</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Instagram</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://instagram.com/uhppa</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Email</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">uhppa@uh.edu</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Linktree</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://linktr.ee/uhppa</div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#666;">Discord</label>
+            <div style="margin-top:4px;padding:8px 10px;border:2px solid #2a2a3a;background:white;font-size:13px;color:#999;">https://discord.gg/...</div>
+          </div>
+        </div>
+        <button style="margin-top:14px;padding:8px 16px;background:oklch(0.68 0.14 145);border:2px solid #2a2a3a;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:3px 3px 0 #2a2a3a;">Save Socials</button>
+      </div>
+    </div>
+    <div style="margin-top:6px;font-size:13px;color:#555;text-align:center;">
+      No new tab. Socials section added at the bottom of the Members page.<br/>
+      Simpler, but less discoverable and mixes concerns.
+    </div>
+  </div>
+
+</div>

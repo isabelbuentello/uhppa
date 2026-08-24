@@ -25,11 +25,11 @@ const OfficerCard = ({ officer, index }) => {
       }}>
         {officer.photoUrl ? (
           <img src={officer.photoUrl} alt={officer.name} style={{
-            width: '100%', height: 140, objectFit: 'cover',
+            width: '100%', height: 220, objectFit: 'cover',
           }} />
         ) : (
           <div style={{
-            width: '100%', height: 140, background: color,
+            width: '100%', height: 220, background: color,
             display: 'grid', placeItems: 'center',
             fontFamily: "'Alfa Slab One', serif", fontSize: 48, color: 'var(--ink)',
           }}>{initials}</div>
@@ -42,7 +42,7 @@ const OfficerCard = ({ officer, index }) => {
           }}>{officer.position}</div>
           <p style={{
             fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 13,
-            lineHeight: 1.4, color: 'var(--ink-soft)', marginTop: 8, margin: '8px 0 0',
+            lineHeight: 1.4, color: 'var(--ink-soft)', marginTop: 8, margin: '8px 0 0', whiteSpace: 'pre-line',
           }}>{officer.bio}</p>
         </div>
       </div>

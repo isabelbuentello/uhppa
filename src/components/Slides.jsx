@@ -27,7 +27,7 @@ const DeckCard = ({ deck, rot }) => {
       }}>
         {/* mock pdf preview */}
         <div style={{
-          height: 200, borderBottom: '2px solid var(--ink)',
+          height: 320, borderBottom: '2px solid var(--ink)',
           background: 'var(--paper)',
           backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 18px, oklch(0.85 0.03 85) 18px 19px)',
           padding: 18, position: 'relative',
@@ -69,7 +69,7 @@ const DeckCard = ({ deck, rot }) => {
                 padding: '10px 12px',
                 fontFamily: "'Archivo Black', sans-serif", letterSpacing: '.1em',
                 textTransform: 'uppercase', fontSize: 12, cursor: 'pointer',
-              }}>&darr; Download PDF</button>
+              }}>View in Google Drive &rarr;</button>
             </a>
           ) : (
             <button disabled style={{
