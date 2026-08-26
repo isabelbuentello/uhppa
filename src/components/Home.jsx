@@ -1,7 +1,8 @@
+import { useState, useMemo } from 'react';
 import { Tape, Highlight, Scribble, Sticky, Stamp, Marquee, SectionHeading } from './Primitives';
 import Officers from './Officers';
 import Sponsors from './Sponsors';
-import { useFirestoreDoc } from '../hooks/useFirestore';
+import { useFirestoreDoc, useFirestoreQuery } from '../hooks/useFirestore';
 
 const socialLink = {
   fontFamily: "'JetBrains Mono', monospace",
@@ -23,39 +24,34 @@ const ctaStyle = (bg) => ({
   transition:'transform .1s ease, box-shadow .1s ease',
 });
 
-const FeatureCard = ({ icon, tag, title, body, rotate = 0, bg = 'white', onClick }) => (
-  <div onClick={onClick} style={{
-    cursor: 'pointer',
-    background: bg,
-    border: '2px solid var(--ink)',
-    padding: '22px 20px 20px',
-    transform: `rotate(${rotate}deg)`,
-    position: 'relative',
-    boxShadow: '5px 5px 0 var(--ink)',
-    transition: 'transform .15s ease, box-shadow .15s ease',
-  }}
-    onMouseEnter={e => { e.currentTarget.style.transform = `rotate(${rotate}deg) translate(-2px,-2px)`; e.currentTarget.style.boxShadow = '8px 8px 0 var(--pink)'; }}
-    onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${rotate}deg)`; e.currentTarget.style.boxShadow = '5px 5px 0 var(--ink)'; }}
-  >
-    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-      <span style={{ fontFamily:"'JetBrains Mono', monospace", fontSize: 11, letterSpacing:'.2em', color:'var(--ink-soft)' }}>NO.{tag}</span>
-      <span style={{ fontSize: 26 }}>{icon}</span>
-    </div>
-    <h3 style={{
-      fontFamily:"'Alfa Slab One', serif",
-      fontSize: 32, margin: '18px 0 8px', lineHeight: 1,
-    }}>{title}</h3>
-    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.45, color:'var(--ink-soft)' }}>{body}</p>
-    <div style={{ marginTop: 14, fontFamily:"'Kalam', cursive", fontSize: 18 }}>
-      open &rarr;
-    </div>
-  </div>
-);
+const categoryColors = {
+  meeting: 'var(--tape)', social: 'var(--pink)', volunteer: 'var(--green)',
+  board: 'var(--blue)', special: 'var(--pink)',
+};
+
+const categoryLabel = (c) => ({
+  meeting: 'Meeting', social: 'Social', volunteer: 'Volunteer',
+  board: 'Board', special: 'Special',
+}[c] || c);
 
 const Home = ({ go, tweaks }) => {
   const { data: clubInfo } = useFirestoreDoc('clubInfo', 'main');
+  const { data: allEvents } = useFirestoreQuery('events');
   const stats = clubInfo?.stats;
   const socials = clubInfo?.socials;
+
+  const today = new Date().toISOString().split('T')[0];
+  const upcoming = useMemo(() => {
+    return allEvents
+      .filter(e => e.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date));
+  }, [allEvents, today]);
+
+  const [eventIdx, setEventIdx] = useState(0);
+  const visibleCount = 3;
+  const canPrev = eventIdx > 0;
+  const canNext = eventIdx + visibleCount < upcoming.length;
+  const visibleEvents = upcoming.slice(eventIdx, eventIdx + visibleCount);
 
   return (
     <div className="page-container" style={{ position: 'relative', padding: '28px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
@@ -241,18 +237,129 @@ const Home = ({ go, tweaks }) => {
         ]} bg="var(--ink)" color="var(--paper)"/>
       </div>
 
-      {/* Four feature cards — magazine cut-outs */}
+      {/* Upcoming Events carousel */}
       <div style={{ marginTop: 64 }}>
-        <SectionHeading kicker="what we do" title="Club, but make it organized." rotate={-1}/>
-        <div className="feature-grid" style={{
-          marginTop: 36, display:'grid', gap: 28,
-          gridTemplateColumns:'repeat(4, 1fr)',
-        }}>
-          <FeatureCard icon="&#9986;" tag="01" title="Networking" body="Mixers with PharmD students, pharmacists, and alumni from UH partner programs." rotate={-2} bg="white" onClick={()=>go('calendar')}/>
-          <FeatureCard icon="&#8853;" tag="02" title="Volunteer Ops" body="Clinics, health fairs & drives — hours that count for your application." rotate={1.5} bg="var(--paper-2)" onClick={()=>go('calendar')}/>
-          <FeatureCard icon="&#9998;" tag="03" title="App Guidance" body="PCAT prep, PharmCAS help, mock interviews & essay reviews from upperclassmen." rotate={-1} bg="white" onClick={()=>go('slides')}/>
-          <FeatureCard icon="&#9733;" tag="04" title="Points & Leaderboard" body="Show up, volunteer, prep. Rack up points & earn cords at year-end." rotate={2} bg="var(--tape)" onClick={()=>go('leaderboard')}/>
-        </div>
+        <SectionHeading kicker="coming up" title="Upcoming events." rotate={-1}/>
+        {upcoming.length > 0 ? (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 16 }}>
+              <button onClick={() => setEventIdx(i => Math.max(0, i - 1))} disabled={!canPrev} style={{
+                border: '2px solid var(--ink)', background: canPrev ? 'white' : 'var(--paper-2)',
+                color: canPrev ? 'var(--ink)' : 'var(--ink-soft)',
+                padding: '8px 14px', fontFamily: "'Archivo Black', sans-serif",
+                fontSize: 14, cursor: canPrev ? 'pointer' : 'default',
+                boxShadow: canPrev ? '3px 3px 0 var(--ink)' : 'none',
+              }}>&larr;</button>
+              <button onClick={() => setEventIdx(i => Math.min(upcoming.length - visibleCount, i + 1))} disabled={!canNext} style={{
+                border: '2px solid var(--ink)', background: canNext ? 'white' : 'var(--paper-2)',
+                color: canNext ? 'var(--ink)' : 'var(--ink-soft)',
+                padding: '8px 14px', fontFamily: "'Archivo Black', sans-serif",
+                fontSize: 14, cursor: canNext ? 'pointer' : 'default',
+                boxShadow: canNext ? '3px 3px 0 var(--ink)' : 'none',
+              }}>&rarr;</button>
+            </div>
+            <div className="feature-grid" style={{
+              marginTop: 16, display: 'grid', gap: 28,
+              gridTemplateColumns: `repeat(${Math.min(visibleCount, upcoming.length)}, 1fr)`,
+            }}>
+              {visibleEvents.map((event, i) => {
+                const color = categoryColors[event.category] || 'var(--tape)';
+                const d = new Date(event.date + 'T00:00:00');
+                const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+                const monthName = d.toLocaleDateString('en-US', { month: 'short' });
+                const dayNum = d.getDate();
+                const rot = (i % 3 - 1) * 2;
+                return (
+                  <div key={event.id} onClick={() => go('calendar')} style={{
+                    cursor: 'pointer',
+                    background: 'white',
+                    border: '2px solid var(--ink)',
+                    padding: 0,
+                    transform: `rotate(${rot}deg)`,
+                    position: 'relative',
+                    boxShadow: '5px 5px 0 var(--ink)',
+                    transition: 'transform .15s ease, box-shadow .15s ease',
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = `rotate(${rot}deg) translate(-2px,-2px)`; e.currentTarget.style.boxShadow = '8px 8px 0 var(--pink)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${rot}deg)`; e.currentTarget.style.boxShadow = '5px 5px 0 var(--ink)'; }}
+                  >
+                    <Tape r={-8 + i * 5} color={color} w={80} style={{ top: -10, left: 40 }} />
+                    {/* Date strip */}
+                    <div style={{
+                      background: color, borderBottom: '2px solid var(--ink)',
+                      padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 14,
+                    }}>
+                      <div style={{
+                        fontFamily: "'Alfa Slab One', serif", fontSize: 42, lineHeight: 1,
+                      }}>{dayNum}</div>
+                      <div>
+                        <div style={{
+                          fontFamily: "'Archivo Black', sans-serif", fontSize: 14,
+                          textTransform: 'uppercase', letterSpacing: '.08em',
+                        }}>{monthName}</div>
+                        <div style={{
+                          fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
+                          letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--ink-soft)',
+                        }}>{dayName}</div>
+                      </div>
+                    </div>
+                    {/* Content */}
+                    <div style={{ padding: '18px 20px 20px' }}>
+                      <div style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        marginBottom: 10,
+                      }}>
+                        <span style={{
+                          background: 'var(--paper-2)', border: '1.5px solid var(--ink)',
+                          padding: '2px 8px', fontFamily: "'JetBrains Mono', monospace",
+                          fontSize: 10, letterSpacing: '.1em', textTransform: 'uppercase',
+                        }}>{categoryLabel(event.category)}</span>
+                        {event.time && (
+                          <span style={{
+                            fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
+                            color: 'var(--ink-soft)',
+                          }}>{event.time}</span>
+                        )}
+                      </div>
+                      <h3 style={{
+                        fontFamily: "'Alfa Slab One', serif",
+                        fontSize: 22, margin: '0 0 8px', lineHeight: 1.1,
+                      }}>{event.title}</h3>
+                      {event.location && (
+                        <div style={{
+                          fontFamily: "'Kalam', cursive", fontSize: 15,
+                          color: 'var(--ink-soft)', marginBottom: 6,
+                        }}>&#9741; {event.location}</div>
+                      )}
+                      {event.description && (
+                        <p style={{
+                          margin: 0, fontSize: 14, lineHeight: 1.4,
+                          color: 'var(--ink-soft)',
+                          fontFamily: "'Bricolage Grotesque', sans-serif",
+                          display: '-webkit-box', WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                        }}>{event.description}</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{
+              marginTop: 14, textAlign: 'center',
+              fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
+              letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--ink-soft)',
+            }}>
+              {eventIdx + 1}–{Math.min(eventIdx + visibleCount, upcoming.length)} of {upcoming.length} upcoming
+            </div>
+          </>
+        ) : (
+          <div style={{
+            marginTop: 36, padding: 60, textAlign: 'center',
+            fontFamily: "'Kalam', cursive", fontSize: 24, color: 'var(--ink-soft)',
+            border: '2px dashed var(--rule)', background: 'white',
+          }}>no upcoming events yet — check back soon &#9998;</div>
+        )}
       </div>
 
       {/* Strip: numbers */}
