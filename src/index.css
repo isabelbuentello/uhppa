@@ -53,22 +53,12 @@ button{font:inherit;color:inherit}
   .page-container { padding: 28px 28px 60px !important; }
   .hero-letters > div > div { font-size: 160px !important; }
   .site-header-inner { padding: 14px 28px !important; }
-
-  /* Nav hamburger — kick in at 1024px since 6 tabs don't fit */
-  .nav-links { display: none !important; }
-  .hamburger-btn { display: flex !important; }
-  .mobile-nav-overlay { display: flex !important; }
 }
 
 /* --- Tablet (≤768px) --- */
 @media (max-width: 768px) {
   .page-container { padding: 20px 20px 60px !important; }
   .site-header-inner { padding: 10px 16px !important; }
-
-  /* Nav hamburger */
-  .nav-links { display: none !important; }
-  .hamburger-btn { display: flex !important; }
-  .mobile-nav-overlay { display: flex !important; }
 
   /* Hero */
   .hero-letters > div > div { font-size: 100px !important; padding: 10px 12px 4px !important; }
@@ -147,6 +137,12 @@ button{font:inherit;color:inherit}
 
   /* Lightbox */
   .lightbox-inner { max-width: 90vw !important; padding: 10px !important; }
+
+  /* Membership cards → vertical stack */
+  .membership-card {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
 }
 
 /* --- Phone (≤480px) --- */
@@ -183,8 +179,13 @@ button{font:inherit;color:inherit}
 /* Dots hidden by default, shown on mobile */
 .cal-event-dot { display: none; }
 
-/* Hamburger hidden by default, shown on mobile */
-.hamburger-btn { display: none; }
+/* Hamburger hidden by default, shown when nav can't fit in one row */
+.hamburger-btn { display: none !important; }
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .nav-user { display: none !important; }
+  .hamburger-btn { display: flex !important; }
+}
 .mobile-nav-overlay {
   display: none;
   position: fixed; inset: 0; z-index: 100;

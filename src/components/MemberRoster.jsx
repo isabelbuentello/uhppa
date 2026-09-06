@@ -26,7 +26,7 @@ const roleBadge = (role) => {
   };
 };
 
-const gridCols = '1fr 1fr 100px 1fr 120px 110px';
+const gridCols = '1fr 1fr 100px 1fr 120px 80px 110px';
 
 const headerStyle = {
   display: 'grid', gridTemplateColumns: gridCols,
@@ -34,7 +34,7 @@ const headerStyle = {
   fontFamily: "'Archivo Black', sans-serif", fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
 };
 
-const MemberRow = ({ member, isYou, user, changeRole, i }) => {
+const MemberRow = ({ member, isYou, user, changeRole, toggleDues, i }) => {
   const joined = member.createdAt?.toDate
     ? member.createdAt.toDate().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })
     : '—';
@@ -53,6 +53,15 @@ const MemberRow = ({ member, isYou, user, changeRole, i }) => {
       <div style={{ padding: '10px 16px', fontSize: 13 }}>{member.classification || '—'}</div>
       <div style={{ padding: '10px 16px', fontSize: 13 }}>{member.major || '—'}</div>
       <div style={{ padding: '10px 16px', fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>{joined}</div>
+      <div style={{ padding: '10px 16px' }}>
+        <button onClick={() => toggleDues(member)} style={{
+          padding: '3px 10px', border: '1.5px solid var(--ink)',
+          background: member.duesPaid ? 'var(--green)' : 'var(--paper-2)',
+          fontFamily: "'JetBrains Mono', monospace", fontSize: 10,
+          letterSpacing: '.1em', textTransform: 'uppercase',
+          cursor: 'pointer',
+        }}>{member.duesPaid ? 'paid' : 'unpaid'}</button>
+      </div>
       <div style={{ padding: '10px 16px' }}>
         {isYou ? (
           <span style={roleBadge(member.role)}>{member.role}</span>
@@ -80,6 +89,7 @@ const TableHeader = () => (
     <div style={{ padding: '10px 16px' }}>Class</div>
     <div style={{ padding: '10px 16px' }}>Major</div>
     <div style={{ padding: '10px 16px' }}>Joined</div>
+    <div style={{ padding: '10px 16px' }}>Dues</div>
     <div style={{ padding: '10px 16px' }}>Role</div>
   </div>
 );
@@ -88,24 +98,31 @@ const MemberRoster = () => {
   const { user } = useAuth();
   const { data: members, loading } = useFirestoreQuery('members');
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
 
-  const applySearch = (list) => {
-    if (!search) return list;
-    const q = search.toLowerCase();
-    return list.filter(m =>
-      (m.name || '').toLowerCase().includes(q) || (m.email || '').toLowerCase().includes(q)
-    );
+  const applyFilters = (list) => {
+    let result = list;
+    if (search) {
+      const q = search.toLowerCase();
+      result = result.filter(m =>
+        (m.name || '').toLowerCase().includes(q) || (m.email || '').toLowerCase().includes(q)
+      );
+    }
+    if (filter === 'paid') result = result.filter(m => m.duesPaid);
+    if (filter === 'unpaid') result = result.filter(m => !m.duesPaid);
+    if (filter === 'officers') result = result.filter(m => m.role === 'officer');
+    return result;
   };
 
   const sortAlpha = (list) => [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
   const pendingMembers = useMemo(() =>
-    sortAlpha(applySearch(members.filter(m => m.role === 'pending'))),
-  [members, search]);
+    sortAlpha(applyFilters(members.filter(m => m.role === 'pending'))),
+  [members, search, filter]);
 
   const activeMembers = useMemo(() =>
-    sortAlpha(applySearch(members.filter(m => m.role === 'member' || m.role === 'officer'))),
-  [members, search]);
+    sortAlpha(applyFilters(members.filter(m => m.role === 'member' || m.role === 'officer'))),
+  [members, search, filter]);
 
   const changeRole = async (member, newRole) => {
     if (member.id === user.uid) {
@@ -123,6 +140,12 @@ const MemberRoster = () => {
     }
 
     await updateDoc(doc(db, 'members', member.id), { role: newRole });
+  };
+
+  const toggleDues = async (member) => {
+    const action = member.duesPaid ? 'mark as unpaid' : 'mark as paid';
+    if (!confirm(`${action} for ${member.name}?`)) return;
+    await updateDoc(doc(db, 'members', member.id), { duesPaid: !member.duesPaid });
   };
 
   if (loading) return null;
@@ -143,7 +166,24 @@ const MemberRoster = () => {
             }} />
           <span style={{ position: 'absolute', left: 12, top: 11, fontFamily: "'JetBrains Mono', monospace" }}>&#8981;</span>
         </div>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>
+        <div style={{ display: 'flex', gap: 6 }}>
+          {[
+            { id: 'all', label: 'All' },
+            { id: 'paid', label: 'Paid' },
+            { id: 'unpaid', label: 'Unpaid' },
+            { id: 'officers', label: 'Officers' },
+          ].map(f => (
+            <button key={f.id} onClick={() => setFilter(f.id)} style={{
+              padding: '8px 14px', border: '2px solid var(--ink)',
+              background: filter === f.id ? 'var(--ink)' : 'white',
+              color: filter === f.id ? 'var(--paper)' : 'var(--ink)',
+              fontFamily: "'Archivo Black', sans-serif", letterSpacing: '.1em',
+              textTransform: 'uppercase', fontSize: 11, cursor: 'pointer',
+              boxShadow: '3px 3px 0 var(--ink)',
+            }}>{f.label}</button>
+          ))}
+        </div>
+        <span style={{ marginLeft: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>
           {members.length} total members
         </span>
       </div>
@@ -160,7 +200,7 @@ const MemberRoster = () => {
           <div style={{ border: '2px solid var(--ink)', background: 'white', boxShadow: '4px 4px 0 var(--tape)' }}>
             <TableHeader />
             {pendingMembers.map((member, i) => (
-              <MemberRow key={member.id} member={member} isYou={member.id === user?.uid} user={user} changeRole={changeRole} i={i} />
+              <MemberRow key={member.id} member={member} isYou={member.id === user?.uid} user={user} changeRole={changeRole} toggleDues={toggleDues} i={i} />
             ))}
           </div>
         </div>
@@ -177,7 +217,7 @@ const MemberRoster = () => {
         <div style={{ border: '2px solid var(--ink)', background: 'white', boxShadow: '6px 6px 0 var(--ink)' }}>
           <TableHeader />
           {activeMembers.map((member, i) => (
-            <MemberRow key={member.id} member={member} isYou={member.id === user?.uid} user={user} changeRole={changeRole} i={i} />
+            <MemberRow key={member.id} member={member} isYou={member.id === user?.uid} user={user} changeRole={changeRole} toggleDues={toggleDues} i={i} />
           ))}
           {activeMembers.length === 0 && (
             <div style={{ padding: 40, textAlign: 'center', fontFamily: "'Kalam', cursive", fontSize: 22, color: 'var(--ink-soft)' }}>

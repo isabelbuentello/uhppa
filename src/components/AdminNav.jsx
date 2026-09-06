@@ -10,6 +10,7 @@ const tabs = [
   { path: '/admin/sponsors',  label: 'Sponsors' },
   { path: '/admin/slides',    label: 'Slides' },
   { path: '/admin/club-info', label: 'Club Info' },
+  { path: '/admin/membership', label: 'Membership' },
 ];
 
 const AdminNav = () => {
@@ -18,7 +19,7 @@ const AdminNav = () => {
 
   return (
     <div className="admin-nav" style={{
-      display: 'flex', gap: 8, marginBottom: 28, flexWrap: 'wrap',
+      display: 'flex', gap: 8, marginBottom: 28, flexWrap: 'wrap', justifyContent: 'center',
     }}>
       {tabs.map(t => {
         const active = location.pathname === t.path;

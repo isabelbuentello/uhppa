@@ -17,6 +17,8 @@ import OfficerEditor from './components/OfficerEditor';
 import SponsorEditor from './components/SponsorEditor';
 import SlidesEditor from './components/SlidesEditor';
 import ClubInfoEditor from './components/ClubInfoEditor';
+import Membership from './components/Membership';
+import MembershipEditor from './components/MembershipEditor';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -50,6 +52,7 @@ const App = () => {
     { id: 'home',        path: '/',            label: 'Home' },
     { id: 'gallery',     path: '/gallery',     label: 'Gallery' },
     { id: 'calendar',    path: '/calendar',    label: 'Calendar' },
+    { id: 'membership',  path: '/membership',  label: 'Membership' },
     { id: 'slides',      path: '/slides',      label: 'Slides' },
     { id: 'points',      path: '/points',      label: 'Points' },
     { id: 'leaderboard', path: '/leaderboard', label: 'Leaderboard' },
@@ -78,53 +81,63 @@ const App = () => {
       }}>
         <div className="site-header-inner" style={{
           maxWidth: 1400, margin: '0 auto',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '14px 48px',
+          padding: '10px clamp(14px, 3vw, 48px)',
         }}>
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', textDecoration: 'none' }}>
-            <img src="/uhppa-logo.png" alt="" style={{ width: 44, height: 44, objectFit: 'cover', border: '2px solid var(--ink)', background: 'var(--ink)', padding: 2 }} />
-            <div>
-              <div style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 24, lineHeight: .9, letterSpacing: '.01em' }}>UHPPA</div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>
-                est. 1995
+          <div className="header-top-row" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', textDecoration: 'none' }}>
+              <img src="/uhppa-logo.png" alt="" style={{ width: 44, height: 44, objectFit: 'cover', border: '2px solid var(--ink)', background: 'var(--ink)', padding: 2 }} />
+              <div>
+                <div style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 24, lineHeight: .9, letterSpacing: '.01em' }}>UHPPA</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>
+                  est. 1995
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
 
-          <nav className="nav-links" style={{ display: 'flex', gap: 10 }}>
+            <div className="nav-user" style={{ display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap' }}>
+              {!loading && (user ? (
+                <>
+                  <span style={{ fontFamily: "'Kalam', cursive", fontSize: 15 }}>
+                    hi, <b>{user.displayName || user.email.split('@')[0]}</b> &#9825;
+                  </span>
+                  {role === 'officer' && (
+                    <NavBtn onClick={() => navigate('/admin/approvals')} rotate={0.5}>
+                      Admin
+                    </NavBtn>
+                  )}
+                  <button onClick={signOut} style={{
+                    border: '2px solid var(--ink)', background: 'var(--pink)',
+                    padding: '6px 12px', fontFamily: "'Archivo Black', sans-serif",
+                    letterSpacing: '.08em', textTransform: 'uppercase', fontSize: 11, cursor: 'pointer',
+                  }}>log out</button>
+                </>
+              ) : (
+                <NavBtn onClick={() => setLoginOpen(true)} rotate={-1}>
+                  &#10022; Login
+                </NavBtn>
+              ))}
+            </div>
+
+            {/* Hamburger button — visible on mobile, sits right of logo */}
+            <button className="hamburger-btn" onClick={() => setMenuOpen(true)} style={{
+              background: 'none', border: '2px solid var(--ink)', padding: '6px 10px',
+              fontFamily: "'Archivo Black', sans-serif", fontSize: 18, cursor: 'pointer',
+              boxShadow: '2px 2px 0 var(--ink)',
+            }}>&#9776;</button>
+          </div>
+
+          <nav className="nav-links" style={{
+            display: 'flex', gap: 'clamp(3px, 0.5vw, 8px)', alignItems: 'center',
+            justifyContent: 'center', marginTop: 8,
+          }}>
             {tabs.map((t, i) => (
               <NavBtn key={t.id} active={isActive(t.path)} onClick={() => navigate(t.path)} rotate={(i % 2 ? 0.5 : -0.5)}>
                 {t.label}
               </NavBtn>
             ))}
-            <span style={{ width: 10 }} />
-            {!loading && (user ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: "'Kalam', cursive", fontSize: 16 }}>
-                hi, <b>{user.displayName || user.email.split('@')[0]}</b> &#9825;
-                {role === 'officer' && (
-                  <NavBtn onClick={() => navigate('/admin/approvals')} rotate={0.5}>
-                    Admin
-                  </NavBtn>
-                )}
-                <button onClick={signOut} style={{
-                  border: '2px solid var(--ink)', background: 'var(--pink)',
-                  padding: '6px 12px', fontFamily: "'Archivo Black', sans-serif",
-                  letterSpacing: '.08em', textTransform: 'uppercase', fontSize: 11, cursor: 'pointer',
-                }}>log out</button>
-              </div>
-            ) : (
-              <NavBtn onClick={() => setLoginOpen(true)} rotate={-1}>
-                &#10022; Login
-              </NavBtn>
-            ))}
           </nav>
-
-          {/* Hamburger button — visible on mobile only */}
-          <button className="hamburger-btn" onClick={() => setMenuOpen(true)} style={{
-            background: 'none', border: '2px solid var(--ink)', padding: '6px 10px',
-            fontFamily: "'Archivo Black', sans-serif", fontSize: 18, cursor: 'pointer',
-            boxShadow: '2px 2px 0 var(--ink)',
-          }}>&#9776;</button>
 
         </div>
       </header>
@@ -192,6 +205,7 @@ const App = () => {
           <Route path="/" element={<Home go={go} tweaks={tweaks} />} />
           <Route path="/calendar" element={<Calendar tweaks={tweaks} />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/membership" element={<Membership />} />
           <Route path="/slides" element={
             <ProtectedRoute onLoginClick={openLogin}>
               <Slides tweaks={tweaks} />
@@ -250,6 +264,11 @@ const App = () => {
           <Route path="/admin/club-info" element={
             <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
               <ClubInfoEditor />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/membership" element={
+            <ProtectedRoute requiredRole="officer" onLoginClick={openLogin}>
+              <MembershipEditor />
             </ProtectedRoute>
           } />
         </Routes>

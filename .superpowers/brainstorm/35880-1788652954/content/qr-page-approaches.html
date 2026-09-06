@@ -1,0 +1,117 @@
+<h2>QR Codes Page — Layout Approaches</h2>
+<p class="subtitle">How should QR codes be presented to visitors? Click your favorite.</p>
+
+<div class="cards">
+
+  <!-- Option A: Polaroid Grid -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 24px; background: #f5f0e6;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <!-- Card 1 -->
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 12px; transform: rotate(-2deg); box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 60%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/8px 8px;"></div>
+          </div>
+          <div style="margin-top: 8px; font-family: serif; font-weight: bold; font-size: 13px;">Venmo</div>
+          <div style="font-family: monospace; font-size: 9px; color: #666; margin-top: 2px;">PAYMENT</div>
+        </div>
+        <!-- Card 2 -->
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 12px; transform: rotate(1.5deg); box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 60%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/8px 8px;"></div>
+          </div>
+          <div style="margin-top: 8px; font-family: serif; font-weight: bold; font-size: 13px;">Membership</div>
+          <div style="font-family: monospace; font-size: 9px; color: #666; margin-top: 2px;">FORM</div>
+        </div>
+        <!-- Card 3 -->
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 12px; transform: rotate(1deg); box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 60%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/8px 8px;"></div>
+          </div>
+          <div style="margin-top: 8px; font-family: serif; font-weight: bold; font-size: 13px;">CashApp</div>
+          <div style="font-family: monospace; font-size: 9px; color: #666; margin-top: 2px;">PAYMENT</div>
+        </div>
+        <!-- Card 4 -->
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 12px; transform: rotate(-1.5deg); box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 60%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/8px 8px;"></div>
+          </div>
+          <div style="margin-top: 8px; font-family: serif; font-weight: bold; font-size: 13px;">Zelle</div>
+          <div style="font-family: monospace; font-size: 9px; color: #666; margin-top: 2px;">PAYMENT</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Polaroid Grid</h3>
+      <p>QR codes in polaroid-style cards with tape, slight rotations — matches the scrapbook aesthetic. Cards in a responsive grid (3-4 across on desktop, 1-2 on mobile). Each card shows QR code, label, and category tag.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Big Cards with Description -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 24px; background: #f5f0e6;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Card 1 -->
+        <div style="background: white; border: 2px solid #1a1a3e; display: flex; align-items: center; gap: 16px; padding: 16px; box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 80px; height: 80px; flex-shrink: 0; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 55px; height: 55px; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/6px 6px;"></div>
+          </div>
+          <div>
+            <div style="font-family: serif; font-weight: bold; font-size: 16px;">Pay Dues — Venmo</div>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">Scan to pay $25 semester dues via Venmo. Include your name in the note.</div>
+            <div style="margin-top: 6px; font-family: monospace; font-size: 10px; padding: 2px 6px; background: #e8dcc8; border: 1px solid #1a1a3e; display: inline-block;">PAYMENT</div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div style="background: white; border: 2px solid #1a1a3e; display: flex; align-items: center; gap: 16px; padding: 16px; box-shadow: 4px 4px 0 #1a1a3e;">
+          <div style="width: 80px; height: 80px; flex-shrink: 0; background: white; border: 1px solid #ddd; display: grid; place-items: center;">
+            <div style="width: 55px; height: 55px; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/6px 6px;"></div>
+          </div>
+          <div>
+            <div style="font-family: serif; font-weight: bold; font-size: 16px;">Membership Form</div>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">Scan to fill out the official UHPPA membership Google Form.</div>
+            <div style="margin-top: 6px; font-family: monospace; font-size: 10px; padding: 2px 6px; background: #a3c7a0; border: 1px solid #1a1a3e; display: inline-block;">FORM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — List Cards</h3>
+      <p>Horizontal cards with QR on the left, title + description + category on the right. Stacked vertically, no rotation. Cleaner and more scannable, but less playful. Better if descriptions are important.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Polaroid Grid with Click-to-Expand -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 24px; background: #f5f0e6;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+        <!-- Small cards -->
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 10px; transform: rotate(-1.5deg); box-shadow: 3px 3px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: #f5f0e6; display: grid; place-items: center;">
+            <div style="width: 50%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/6px 6px;"></div>
+          </div>
+          <div style="margin-top: 6px; font-family: serif; font-weight: bold; font-size: 11px;">Venmo</div>
+        </div>
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 10px; transform: rotate(1deg); box-shadow: 3px 3px 0 #1a1a3e; position: relative;">
+          <div style="position: absolute; top: -6px; left: 20px; width: 40px; height: 14px; background: #e8b4b8; border: 1px solid #1a1a3e; transform: rotate(-6deg);"></div>
+          <div style="width: 100%; aspect-ratio: 1; background: #f5f0e6; display: grid; place-items: center;">
+            <div style="width: 50%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/6px 6px;"></div>
+          </div>
+          <div style="margin-top: 6px; font-family: serif; font-weight: bold; font-size: 11px;">Membership</div>
+        </div>
+        <div style="background: white; border: 2px solid #1a1a3e; padding: 10px; transform: rotate(2deg); box-shadow: 3px 3px 0 #1a1a3e;">
+          <div style="width: 100%; aspect-ratio: 1; background: #f5f0e6; display: grid; place-items: center;">
+            <div style="width: 50%; aspect-ratio: 1; background: repeating-conic-gradient(#1a1a3e 0% 25%, white 0% 50%) 50%/6px 6px;"></div>
+          </div>
+          <div style="margin-top: 6px; font-family: serif; font-weight: bold; font-size: 11px;">CashApp</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 12px; font-family: cursive; font-size: 13px; color: #666;">click a card to enlarge &uarr;</div>
+    </div>
+    <div class="card-body">
+      <h3>C — Grid + Lightbox</h3>
+      <p>Polaroid grid like A, but QR codes are smaller thumbnails. Clicking a card opens a lightbox with the full-size QR, description, and a direct link. Best for mobile — users tap to get a scannable-size QR.</p>
+    </div>
+  </div>
+
+</div>
