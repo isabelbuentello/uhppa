@@ -89,7 +89,6 @@ button{font:inherit;color:inherit}
   .podium-grid .podium-bar { height: auto !important; min-height: 80px !important; }
 
   /* Calendar compact */
-  .calendar-grid { grid-auto-rows: 1fr !important; }
   .calendar-grid .cal-cell { min-height: 48px !important; padding: 4px !important; }
   .calendar-grid .cal-day-num { font-size: 14px !important; }
   .calendar-grid .cal-event-chip { display: none !important; }

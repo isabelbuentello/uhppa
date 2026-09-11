@@ -83,6 +83,7 @@ const Cell = ({ d, events, isLast, isBottom, onEventClick }) => {
     borderRight: isLast ? 'none' : '2px solid var(--ink)',
     borderBottom: isBottom ? 'none' : '2px solid var(--ink)',
     backgroundImage: 'repeating-linear-gradient(45deg, transparent 0 6px, oklch(0.86 0.03 85) 6px 7px)',
+    overflow: 'hidden', minWidth: 0,
   }} />;
   return (
     <div className="cal-cell" style={{
@@ -90,6 +91,7 @@ const Cell = ({ d, events, isLast, isBottom, onEventClick }) => {
       borderRight: isLast ? 'none' : '2px solid var(--ink)',
       borderBottom: isBottom ? 'none' : '2px solid var(--ink)',
       background: 'white',
+      overflow: 'hidden', minWidth: 0,
     }}>
       <div className="cal-day-num" style={{ fontFamily: "'Alfa Slab One', serif", fontSize: 20, lineHeight: 1 }}>{d}</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginTop: 6 }}>
@@ -197,8 +199,9 @@ const Calendar = ({ tweaks }) => {
 
       {/* Day headers */}
       <div className="calendar-grid" style={{
-        marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)',
+        marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
         gap: 0, border: '2px solid var(--ink)', background: 'white',
+        width: '100%', tableLayout: 'fixed',
       }}>
         {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((d, i) => (
           <div key={d} className="cal-day-header" style={{
