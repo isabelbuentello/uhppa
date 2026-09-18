@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import AdminNav from './AdminNav';
+import ManualAward from './ManualAward';
 import { SectionHeading } from './Primitives';
 import { useAuth } from '../contexts/AuthContext';
 import { useFirestoreQuery } from '../hooks/useFirestore';
@@ -86,6 +87,15 @@ const PointsQueue = () => {
     <div className="page-container" style={{ padding: '28px 48px 80px', maxWidth: 1100, margin: '0 auto' }}>
       <AdminNav />
       <SectionHeading kicker="officer tools" title="Points Queue" rotate={-1} />
+
+      <ManualAward members={members} />
+
+      <div style={{
+        marginTop: 34, fontFamily: "'Archivo Black', sans-serif",
+        fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase',
+      }}>
+        pending requests
+      </div>
 
       {sorted.length === 0 ? (
         <div style={{ padding: 60, textAlign: 'center', fontFamily: "'Kalam', cursive", fontSize: 24, color: 'var(--ink-soft)' }}>

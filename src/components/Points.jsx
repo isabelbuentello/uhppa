@@ -12,6 +12,7 @@ const CATEGORIES = [
   { key: 'social',    label: 'Socials',           color: 'green' },
   { key: 'special',   label: 'Specials',          color: 'tape' },
   { key: 'board',     label: 'Board',             color: 'ink' },
+  { key: 'other',     label: 'Other',             color: 'ink-soft' },
 ];
 
 const cmap = (c) => `var(--${c})`;

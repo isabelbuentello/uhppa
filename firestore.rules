@@ -39,6 +39,9 @@ service cloud.firestore {
       allow create: if request.auth != null
         && request.resource.data.memberId == request.auth.uid
         && request.auth.token.role in ['member', 'officer'];
+      // Officers can create entries for any member (manual award)
+      allow create: if request.auth != null
+        && request.auth.token.role == 'officer';
       // Members can read their own entries
       allow read: if request.auth != null
         && resource.data.memberId == request.auth.uid;
