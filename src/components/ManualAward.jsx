@@ -57,6 +57,9 @@ const ManualAward = ({ members }) => {
   const [saving, setSaving] = useState(false);
   const [awarded, setAwarded] = useState([]);
 
+  // A negative amount is a deduction — the button restyles so the sign can't slip by unnoticed.
+  const isDeduction = Number(points) < 0;
+
   // Only real members/officers can be awarded — pending and denied accounts can't.
   const eligible = useMemo(
     () => members.filter(m => m.role === 'member' || m.role === 'officer'),
@@ -89,8 +92,8 @@ const ManualAward = ({ members }) => {
     setErr('');
     if (!picked) { setErr('Pick a member from the list.'); return; }
     const amount = Number(points);
-    if (!points || !Number.isFinite(amount) || amount <= 0) {
-      setErr('Enter a point amount greater than zero.');
+    if (!points || !Number.isFinite(amount) || amount === 0) {
+      setErr('Enter a point amount — positive to award, negative to take away.');
       return;
     }
     if (!reason.trim()) { setErr('Enter a reason — it shows on the member\'s activity list.'); return; }
@@ -211,7 +214,7 @@ const ManualAward = ({ members }) => {
           <span style={labelStyle}>points *</span>
           <input
             type="number"
-            min="1"
+            step="1"
             value={points}
             placeholder="10"
             onChange={e => setPoints(e.target.value)}
@@ -251,12 +254,20 @@ const ManualAward = ({ members }) => {
         <button
           onClick={submit}
           disabled={saving}
-          style={{ ...btnStyle, background: 'var(--green)', opacity: saving ? 0.6 : 1 }}
+          style={{
+            ...btnStyle,
+            background: isDeduction ? 'var(--pink)' : 'var(--green)',
+            opacity: saving ? 0.6 : 1,
+          }}
         >
-          {saving ? 'awarding...' : 'award points'}
+          {saving
+            ? (isDeduction ? 'taking away...' : 'awarding...')
+            : (isDeduction ? '− take points away' : 'award points')}
         </button>
         <span style={{ fontFamily: "'Kalam', cursive", fontSize: 14, color: 'var(--ink-soft)' }}>
-          reason &amp; category stick around — award one member after another
+          {isDeduction
+            ? 'negative amount — this will subtract from their total'
+            : 'reason & category stick around — award one member after another'}
         </span>
       </div>
 
@@ -283,8 +294,10 @@ const ManualAward = ({ members }) => {
                 {a.name}
                 <span style={{
                   fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
-                  marginLeft: 7, color: 'var(--ink-soft)',
-                }}>+{a.points}</span>
+                  marginLeft: 7,
+                  color: a.points < 0 ? 'var(--margin)' : 'var(--ink-soft)',
+                  fontWeight: a.points < 0 ? 700 : 400,
+                }}>{a.points < 0 ? '' : '+'}{a.points}</span>
               </span>
             ))}
           </div>

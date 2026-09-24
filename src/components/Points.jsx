@@ -55,7 +55,9 @@ const Points = ({ tweaks }) => {
     })),
   [semesterEntries]);
 
-  const pct = Math.min(100, (total / semesterGoal) * 100);
+  // Clamped at both ends — deductions can drive the total negative, and a
+  // negative width is invalid CSS.
+  const pct = Math.max(0, Math.min(100, (total / semesterGoal) * 100));
 
   // --- Check-in code form ---
   const [codeOpen, setCodeOpen] = useState(false);
@@ -401,7 +403,10 @@ const Points = ({ tweaks }) => {
                     {date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}
                   </div>
                   <div style={{ padding: '12px 16px' }}>{r.eventTitle}</div>
-                  <div style={{ padding: '12px 16px', fontFamily: "'JetBrains Mono', monospace", fontWeight: 700 }}>+{r.points}</div>
+                  <div style={{
+                    padding: '12px 16px', fontFamily: "'JetBrains Mono', monospace", fontWeight: 700,
+                    color: r.points < 0 ? 'var(--margin)' : 'inherit',
+                  }}>{r.points < 0 ? '' : '+'}{r.points}</div>
                   <div style={{ padding: '12px 16px' }}>
                     {r.status === 'verified' ? (
                       <span style={{ color: 'var(--green)', fontFamily: "'Kalam', cursive", fontSize: 18 }}>&#10003; verified</span>
